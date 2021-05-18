@@ -17,8 +17,8 @@
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css %}">
-    <link rel="stylesheet" href="{% static 'css/owl.css %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.css' %}">
 
   </head>
 
@@ -109,7 +109,7 @@
           </div>
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-1-370x270.jpg" alt=""></a>
+              <a href="product-details.html"><img src="{% static 'images/product-1-370x270.jpg' %}" alt=""></a>
               <div class="down-content">
                 <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
                 <h6><small><del>$999.00 </del></small> $779.00</h6>
@@ -120,7 +120,7 @@
 
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-2-370x270.jpg" alt=""></a>
+              <a href="{% static 'product-details.html' %}"><img src="{% static 'images/product-2-370x270.jpg' %}" alt=""></a>
               <div class="down-content">
                 <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
                 <h6><small><del>$99.00</del></small>  $79.00</h6>
@@ -131,7 +131,7 @@
 
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-3-370x270.jpg" alt=""></a>
+              <a href="product-details.html"><img src="{% static 'images/product-3-370x270.jpg' %}" alt=""></a>
               <div class="down-content">
                 <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
                 <h6><small><del>$1999.00</del></small>   $1779.00</h6>
@@ -142,7 +142,7 @@
 
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-4-370x270.jpg" alt=""></a>
+              <a href="product-details.html"><img src="{% static 'images/product-4-370x270.jpg' %}" alt=""></a>
               <div class="down-content">
                 <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
                 <h6><small><del>$999.00 </del></small> $779.00</h6>
@@ -153,7 +153,7 @@
 
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-5-370x270.jpg" alt=""></a>
+              <a href="product-details.html"><img src="{% static 'images/product-5-370x270.jpg' %}" alt=""></a>
               <div class="down-content">
                 <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
                 <h6><small><del>$999.00 </del></small> $779.00</h6>
@@ -164,7 +164,7 @@
 
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-6-370x270.jpg" alt=""></a>
+              <a href="product-details.html"><img src="{% static 'images/product-6-370x270.jpg' %}" alt=""></a>
               <div class="down-content">
                 <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
                 <h6><small><del>$999.00 </del></small> $779.00</h6>
@@ -198,14 +198,14 @@
           </div>
           <div class="col-md-6">
             <div class="right-image">
-              <img src="assets/images/about-1-570x350.jpg" alt="">
+              <img src="{% static 'images/about-1-570x350.jpg' %}" alt="">
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="services" style="background-image: url(assets/images/other-image-fullscren-1-1920x900.jpg);" >
+    <div class="services" style="background-image: url(static/images/other-image-fullscren-1-1920x900.jpg);" >
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -218,7 +218,7 @@
 
           <div class="col-lg-4 col-md-6">
             <div class="service-item">
-              <a href="#" class="services-item-image"><img src="assets/images/blog-1-370x270.jpg" class="img-fluid" alt=""></a>
+              <a href="#" class="services-item-image"><img src="static/images/blog-1-370x270.jpg" class="img-fluid" alt=""></a>
 
               <div class="down-content">
                 <h4><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit hic</a></h4>
@@ -229,7 +229,7 @@
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="service-item">
-              <a href="#" class="services-item-image"><img src="assets/images/blog-2-370x270.jpg" class="img-fluid" alt=""></a>
+              <a href="#" class="services-item-image"><img src="{% static 'images/blog-2-370x270.jpg' %}" class="img-fluid" alt=""></a>
 
               <div class="down-content">
                 <h4><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h4>
@@ -240,7 +240,7 @@
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="service-item">
-              <a href="#" class="services-item-image"><img src="assets/images/blog-3-370x270.jpg" class="img-fluid" alt=""></a>
+              <a href="#" class="services-item-image"><img src="static/images/blog-3-370x270.jpg" class="img-fluid" alt=""></a>
 
               <div class="down-content">
                 <h4><a href="#">Aperiam modi voluptatum fuga officiis cumque</a></h4>
@@ -274,7 +274,7 @@
                   <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
                 </div>
               </div>
-              
+
               <div class="service-item">
                 <div class="icon">
                   <i class="fa fa-user"></i>
@@ -294,7 +294,7 @@
                   <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
                 </div>
               </div>
-              
+
               <div class="service-item">
                 <div class="icon">
                   <i class="fa fa-user"></i>
@@ -304,7 +304,7 @@
                   <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
                 </div>
               </div>
-              
+
               <div class="service-item">
                 <div class="icon">
                   <i class="fa fa-user"></i>
@@ -314,7 +314,7 @@
                   <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
                 </div>
               </div>
-              
+
               <div class="service-item">
                 <div class="icon">
                   <i class="fa fa-user"></i>
@@ -351,7 +351,7 @@
       </div>
     </div>
 
-    
+
     <footer>
       <div class="container">
         <div class="row">
@@ -366,12 +366,12 @@
 
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
 
     <!-- Additional Scripts -->
-    <script src="js/custom.js"></script>
-    <script src="js/owl.js"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/owl.js' %}"></script>
   </body>
 </html>
