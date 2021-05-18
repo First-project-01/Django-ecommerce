@@ -6,5 +6,5 @@ def home(request):
     context = {
         'items': Items.objects.all()
     }
-    return render(request, 'product.html', context)
+    return render(request, 'index.html', context)
 
