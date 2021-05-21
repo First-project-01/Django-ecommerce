@@ -7,7 +7,6 @@
         <div class="row">
           <div class="col-md-12">
             <div class="text-content">
-              <h4>Lorem ipsum dolor sit amet</h4>
               <h2>Product Details</h2>
             </div>
           </div>
@@ -44,26 +43,23 @@
               </div>
             </div>
           </div>
-
-          <div class="col-md-8 col-xs-12">
+            <div class="col-md-8 col-xs-12">
             <form action="#" method="post" class="form">
-              <h2>Lorem ipsum dolor sit amet.</h2>
+              <h2>{{ items.title }}</h2>
 
               <br>
 
               <p class="lead">
-                <small><del> $999.00</del></small><strong class="text-primary">$779.00</strong>
+                <!--<small><del> $999.00</del></small>--><strong class="text-primary">{{ items.price }}</strong>
               </p>
 
               <br>
 
               <p class="lead">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi ratione molestias maxime odio. Provident ratione vero, corrupti, optio laborum aut!
+                {{ items.description }}
               </p>
 
-              <br> 
-
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-sm-4">
                   <label class="control-label">Extra 1</label>
                   <div class="form-group">
