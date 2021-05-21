@@ -106,7 +106,7 @@ a.filled-button:hover {
 
 #preloader {
   overflow: hidden;
-  background: #cd9921;
+  background: #fff;
   left: 0;
   right: 0;
   top: 0;
@@ -297,7 +297,7 @@ header .navbar {
 
 .banner-item-01 {
 	padding: 300px 0px;
-	background-image: url(../images/bedsheet1.jpg);
+	background-image: url(../images/bedsheet3.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -305,7 +305,7 @@ header .navbar {
 
 .banner-item-02 {
 	padding: 300px 0px;
-	background-image: url(../images/bedsheet2.jpg);
+	background-image: url(../images/bedsheet1.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -313,7 +313,7 @@ header .navbar {
 
 .banner-item-03 {
 	padding: 300px 0px;
-	background-image: url(../images/bedsheet3.jpg);
+	background-image: url(../images/bedsheet2.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -340,7 +340,7 @@ header .navbar {
 }
 
 .banner .text-content h2 {
-	color: #000;
+	color: #fff;
 	text-shadow: #d3d3d3;     <!-- check -->
 	font-size: 62px;
 	text-transform: uppercase;
@@ -526,11 +526,11 @@ header .navbar {
 }
 
 .best-features ul.featured-list li a:hover {
-	color: #f33f3f;
+	color: #000;
 }
 
 .best-features ul.featured-list li a:hover::before {
-	background-color: #f33f3f;
+	background-color: #000;
 }
 
 .best-features .filled-button {
@@ -783,7 +783,7 @@ footer .inner-content p a {
 	display: inline-block;
 	text-align: center;
 	line-height: 100px;
-	background-color: #f33f3f;
+	background-color: #000;
 	color: #fff;
 	font-size: 32px;
 }
@@ -816,7 +816,7 @@ footer .inner-content p a {
 }
 
 .owl-clients button.owl-dot { 
-	background: #f1f1f1!important; 
+	background: #000!important;
 	width: 10px!important; 
 	height: 10px!important; 
 	margin: 0 10px!important; 
@@ -824,7 +824,7 @@ footer .inner-content p a {
 }
 
 .owl-clients button.owl-dot.active { 
-	background: #f33f3f!important; 
+	background: #000!important;
 }
 
 /* Clients */
@@ -918,7 +918,7 @@ footer .inner-content p a {
 }
 
 .contact-form button.filled-button {
-	background-color: #f33f3f;
+	background-color: #000;
 	color: #fff;
 	font-size: 14px;
 	text-transform: capitalize;
@@ -950,11 +950,11 @@ footer .inner-content p a {
 }
 
 .accordion a:hover {
-	color: #f33f3f!important;
+	color: #000!important;
 }
 
 .accordion a.active {
-  color: #f33f3f!important;
+  color: #fff!important;
 }
 
 .accordion li .content {
@@ -1083,14 +1083,14 @@ footer .inner-content p a {
 	}
 	.navbar .navbar-nav a.nav-link {
 		padding: 15px 0px;
-		color: #1e1e1e!important;
+		color: #1e1e1e;
 	}
 	.navbar .navbar-nav .nav-link:hover,
 	.navbar .navbar-nav .active>.nav-link,
 	.navbar .navbar-nav .nav-link.active,
 	.navbar .navbar-nav .nav-link.show,
 	.navbar .navbar-nav .show>.nav-link {
-		color: #f33f3f!important;
+		color: #000!important;
 		border-bottom: none!important;
 		padding-bottom: 15px;
 	}
