@@ -219,7 +219,7 @@ header .navbar {
 .background-header .navbar-nav .nav-link.active,
 .background-header .navbar-nav .nav-link.show,
 .background-header .navbar-nav .show>.nav-link {
-	color: #fff;
+	color: #000;
 }
 .navbar .navbar-brand {
 	float: 	left;
@@ -227,7 +227,7 @@ header .navbar {
 	outline: none;
 }
 .navbar .navbar-brand h2 {
-	color: #996712;
+	color: #806200;
 	text-transform: uppercase;
 	font-size: 24px;
 	font-weight: 700;
@@ -238,7 +238,7 @@ header .navbar {
 }
 .navbar .navbar-brand h2 em {
 	font-style: normal;
-	color: #f33f3f;
+	color: #000;
 }
 #navbarResponsive {
 	z-index: 999;
@@ -254,7 +254,7 @@ header .navbar {
 	font-size: 15px;
 	font-weight: 500;
 	letter-spacing: 0.5px;
-	color: #fff;
+	color: #000;
 	transition: all 0.5s;
 	margin-top: 5px;
 }
@@ -263,7 +263,7 @@ header .navbar {
 .navbar .navbar-nav .nav-link.active,
 .navbar .navbar-nav .nav-link.show,
 .navbar .navbar-nav .show>.nav-link {
-	color: #fff;
+	color: #000;
 	padding-bottom: 25px;
 	border-bottom: 3px solid #000;
 }
@@ -305,7 +305,7 @@ header .navbar {
 
 .banner-item-02 {
 	padding: 300px 0px;
-	background-image: url(../images/bedsheet1.jpg);
+	background-image: url(../images/bedsheet2.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -313,7 +313,7 @@ header .navbar {
 
 .banner-item-03 {
 	padding: 300px 0px;
-	background-image: url(../images/bedsheet1.jpg);
+	background-image: url(../images/bedsheet3.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -340,7 +340,7 @@ header .navbar {
 }
 
 .banner .text-content h2 {
-	color: #fff;
+	color: #000;
 	text-shadow: #d3d3d3;     <!-- check -->
 	font-size: 62px;
 	text-transform: uppercase;
@@ -393,7 +393,7 @@ header .navbar {
 	text-transform: uppercase;
 	font-size: 13px;
 	font-weight: 700;
-	color: #f33f3f;
+	color: #806200;
 }
 
 .product-item {
@@ -436,7 +436,7 @@ header .navbar {
 }
 
 .product-item .down-content ul li i {
-	color: #f33f3f;
+	color: #000;
 	font-size: 14px;
 }
 
@@ -445,12 +445,12 @@ header .navbar {
 	right: 30px;
 	bottom: 30px;
 	font-size: 13px;
-	color: #f33f3f;
+	color: #000;
 	font-weight: 500;
 }
 
 .product-item .down-content span a {
-	color: #f33f3f;
+	color: #000;
 	display: inline-block;
 	margin-bottom: 3px;
 }
