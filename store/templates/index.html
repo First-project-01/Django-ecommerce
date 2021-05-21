@@ -7,20 +7,17 @@
       <div class="owl-banner owl-carousel">
         <div class="banner-item-01">
           <div class="text-content">
-            <h4>Find your car today!</h4>
-            <h2>Lorem ipsum dolor sit amet</h2>
+            <h2>Where Quality Matches Expectations</h2>
           </div>
         </div>
         <div class="banner-item-02">
           <div class="text-content">
-            <h4>Fugiat Aspernatur</h4>
-            <h2>Laboriosam reprehenderit ducimus</h2>
+            <h2>Beauty comes with variety</h2>
           </div>
         </div>
         <div class="banner-item-03">
           <div class="text-content">
-            <h4>Saepe Omnis</h4>
-            <h2>Quaerat suscipit unde minus dicta</h2>
+            <h2>Get what you want today!</h2>
           </div>
         </div>
       </div>
@@ -36,71 +33,18 @@
               <a href="{% url 'store:products-list' %}">View More <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
+          {% for item in items %} <!--Limit to 5 items-->
           <div class="col-md-4">
             <div class="product-item">
-              <a href="{% url 'store:product-detail' %}"><img src="{% static 'images/product-1-370x270.jpg' %}" alt=""></a>
+              <a href="{% url 'store:product-detail' %}"><img src="{% static 'images/product1.jpg' %}" alt=""></a>
               <div class="down-content">
-                <a href="{% url 'store:product-detail' %}"><h4>Exclusive Bedsheet</h4></a>
-                <h6><small><del>$999.00 </del></small> $779.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>
+                <a href="{% url 'store:product-detail' %}"><h4>{{ item.title }}</h4></a>
+                <!--<h6><small><del>$999.00 </del></small>-->Rs.{{ item.price }}</h6>
+                <p>{{ item.description }}</p>
               </div>
             </div>
           </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="{% url 'store:product-detail' %}"><img src="{% static 'images/product-2-370x270.jpg' %}" alt=""></a>
-              <div class="down-content">
-                <a href="{% url 'store:product-detail' %}"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$99.00</del></small>  $79.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non beatae soluta, placeat vitae cum maxime culpa itaque minima.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="{% url 'store:product-detail' %}"><img src="{% static 'images/product-3-370x270.jpg' %}" alt=""></a>
-              <div class="down-content">
-                <a href="{% url 'store:product-detail' %}"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$1999.00</del></small>   $1779.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt nisi quia aspernatur, harum facere delectus saepe enim?</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="{% url 'store:product-detail' %}"><img src="{% static 'images/product-4-370x270.jpg' %}" alt=""></a>
-              <div class="down-content">
-                <a href="{% url 'store:product-detail' %}"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$999.00 </del></small> $779.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="{% url 'store:product-detail' %}"><img src="{% static 'images/product-5-370x270.jpg' %}" alt=""></a>
-              <div class="down-content">
-                <a href="{% url 'store:product-detail' %}"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$999.00 </del></small> $779.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="{% url 'store:product-detail' %}"><img src="{% static 'images/product-6-370x270.jpg' %}" alt=""></a>
-              <div class="down-content">
-                <a href="{% url 'store:product-detail' %}"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$999.00 </del></small> $779.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </div>
