@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Items
+from .models import *
 
 
 context = {
@@ -15,3 +15,4 @@ def product(request):
 
 def productdetails(request):
     return render(request, 'product-details.html', context)
+
