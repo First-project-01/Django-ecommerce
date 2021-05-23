@@ -45,18 +45,18 @@
           </div>
             <div class="col-md-8 col-xs-12">
             <form action="#" method="post" class="form">
-              <h2>{{ item.title }}</h2>
+              <h2>{{ object.title }}</h2>
 
               <br>
 
               <p class="lead">
-                <!--<small><del> $999.00</del></small>--><strong class="text-primary">{{ item.price }}</strong>
+                <!--<small><del> $999.00</del></small>--><strong class="text-primary">{{ object.price }}</strong>
               </p>
 
               <br>
 
               <p class="lead">
-                {{ item.description }}
+                {{ object.description }}
               </p>
 
              <div class="row">
@@ -101,18 +101,16 @@
               <a href="{% url 'store:products-list' %}">View More <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
-          {% for item in items %}
-                <div class="col-md-4">
-                    <div class="product-item">
-                      <a href="{% url 'store:product-detail' %}"><img src="{% static 'images/product1.jpg' %}" alt=""></a>
-                      <div class="down-content">
-                        <a href="{% url 'store:product-detail' %}"><h4>{{ item.title }}</h4></a>
-                        <h6><!--<small><del>$999.00 </del></small>-->Rs.{{ item.price }}</h6>
-                        <p>{{ item.description }}</p>
-                      </div>
-                    </div>
+            <div class="col-md-4">
+                <div class="product-item">
+                  <a href="{{ item.get_absolute_url }}"><img src="{% static 'images/product1.jpg' %}" alt=""></a>
+                  <div class="down-content">
+                    <a href="{{ item.get_absolute_url }}"><h4>{{ object.title }}</h4></a>
+                    <h6><!--<small><del>$999.00 </del></small>-->Rs.{{ object.price }}</h6>
+                    <p>{{ object.description }}</p>
                   </div>
-            {% endfor %}
+                </div>
+              </div>
         </div>
       </div>
     </div>
@@ -189,7 +187,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Book Now</button>
+            <button type="button" class="btn btn-primary">Order Now</button>
           </div>
         </div>
       </div>

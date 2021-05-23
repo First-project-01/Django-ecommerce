@@ -17,12 +17,12 @@
     <div class="products">
       <div class="container">
         <div class="row">
-            {% for item in items %}
+            {% for item in object_list %}
                 <div class="col-md-4">
                     <div class="product-item">
-                      <a href="{% url 'store:product-detail' %}"><img src="{% static 'images/product1.jpg' %}" alt=""></a>
+                      <a href="{{ item.get_absolute_url }}"><img src="{% static 'images/product1.jpg' %}" alt=""></a>
                       <div class="down-content">
-                        <a href="{% url 'store:product-detail' %}"><h4>{{ item.title }}</h4></a>
+                        <a href="{{ item.get_absolute_url }}"><h4>{{ item.title }}</h4></a>
                         <h6><!--<small><del>$999.00 </del></small>-->Rs.{{ item.price }}</h6>
                         <p>{{ item.description }}</p>
                       </div>

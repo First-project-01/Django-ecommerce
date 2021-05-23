@@ -45,7 +45,7 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'store:home-page' %}">Home
+                      <a class="nav-link" href="{% url 'store:home-page' %}">Home
                       <span class="sr-only">(current)</span>
                     </a>
                 </li>
@@ -58,14 +58,16 @@
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="{static 'about-us.html' %}">About Us</a>
                       <a class="dropdown-item" href="{static 'blog.html' %}">Blog</a>
-                      <a class="dropdown-item" href="{static 'testimonials.html' %}">Testimonials</a>
+                      <a class="dropdown-item" href="{static 'contact.html' %}">Contact Us</a>
                       <a class="dropdown-item" href="{static 'terms.html' %}">Terms</a>
                     </div>
                 </li>
-
-                <li class="nav-item"><a class="nav-link" href="checkout.html">Checkout</a></li>
-
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="checkout.html">Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                {% endif %}
             </ul>
           </div>
         </div>

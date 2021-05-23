@@ -1,18 +1,29 @@
 from django.shortcuts import render
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import ListView, DetailView
 from .models import *
 
 
-context = {
-        'items': Items.objects.all()
-    }
-def home(request):
-    return render(request, 'index.html', context)
+class HomeView(ListView):
+    model = Items
+    template_name = "index.html"
 
 
-def product(request):
-    return render(request, 'products.html', context)
+class Product(ListView):
+    model = Items
+    paginate_by = 10
+    template_name = 'products.html'
 
 
-def productdetails(request):
-    return render(request, 'product-details.html', context)
+class ProductDetails(DetailView):
+    model = Items.slug
+    template_name =  'product-details.html'
 
+def register(request):
+    form = UserCreationForm()
+    return render(request, 'login.html', {'form' : form})
+
+
+def createuser(request):
+    form = UserCreationForm()
+    return render(request, 'login.html', {'form' : form})
