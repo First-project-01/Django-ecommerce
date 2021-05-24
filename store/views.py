@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from .forms import UserRegisterForm
 from django.views.generic import ListView, DetailView
 from .models import *
 
@@ -16,14 +18,22 @@ class Product(ListView):
 
 
 class ProductDetails(DetailView):
-    model = Items.slug
+    model = Items
     template_name =  'product-details.html'
 
+
 def register(request):
-    form = UserCreationForm()
-    return render(request, 'login.html', {'form' : form})
+    if request.method == 'POST':
+        form = UserRegisterForm()
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}!')
+            return redirect('store:home-page')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'register.html', {'form': form})
 
 
-def createuser(request):
-    form = UserCreationForm()
+def login(request):
     return render(request, 'login.html', {'form' : form})

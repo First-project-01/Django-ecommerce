@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&w8rq&hk@)h5e14=8c#tv$!%0x+u)mc@wt6s=3$6x&-@c70u^d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -23,6 +23,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'store.apps.StoreConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -117,5 +118,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/'
+#LOGIN_REDIRECT_URL = '/'
+CRISPY_TEMPLATE_PACK = '/bootstrap4/'
 

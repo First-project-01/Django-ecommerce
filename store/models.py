@@ -17,19 +17,19 @@ class BaseModel(models.Model):
         abstract = True
 
 
-def create_profile(sender, **kwargs):
-    if kwargs['created']:
-        Customer.objects.create(user=kwargs['instance'])
-    post_save.connect(create_profile, sender=settings.AUTH_USER_MODEL)
+#def create_profile(sender, instance, created, *args, **kwargs):
+#    if created:
+#        Customer.objects.create(user=instance)
+#post_save.connect(create_profile, sender=settings.AUTH_USER_MODEL)
 
 
 class Customer(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=100, null=True)
+    fullname = models.CharField(max_length=100)
     email = models.EmailField(max_length=100, null=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.user} Customer'
 
 
 class Items(BaseModel):
