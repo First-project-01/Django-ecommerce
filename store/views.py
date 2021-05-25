@@ -23,12 +23,12 @@ class ProductDetails(DetailView):
 
 def register(request):
     if request.method == 'POST':
-        form = UserRegisterForm()
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             #username = form.cleaned_data.get('fullname')
             #messages.success(request, f'Account created for {username}!')
-            return redirect('store:login-page')
+            return redirect(reverse('store:home-page'))
     else:
         form = UserRegisterForm()
     return render(request, 'register.html', {'form': form})

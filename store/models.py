@@ -20,6 +20,9 @@ class BaseModel(models.Model):
 class Profile(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.user.username
+
     @receiver(post_save, sender=User) #add this
     def create_user_profile(sender, instance, created, **kwargs):
         if created:

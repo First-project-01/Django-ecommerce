@@ -10,7 +10,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('store.urls', namespace='store')),
     path('register', views_store.register, name='register'),
-    path('login', auth_views.LoginView.as_view(template_name='store/templates/login.html'), name='login-page'),
+    path('login', auth_views.LoginView.as_view(template_name='login.html'), name='login-page'),
+    path('logout', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout-page'),
 ]
 urlpatterns += [
   re_path(r'^static/(?:.*)$', serve, {'document_root': settings.STATIC_ROOT,})
