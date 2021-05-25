@@ -117,5 +117,6 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'store/static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'store:home-page'
+LOGOUT_REDIRECT_URL = 'store:home-page'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_URL = 'login-page'

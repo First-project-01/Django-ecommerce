@@ -10,6 +10,11 @@ AVAILABILITY = (
     ('N', 'Out of Stock'),
 )
 
+ADDRESS_CHOICES = {
+    ('S', 'Shipping'),
+    ('B', 'Billing')
+}
+
 class BaseModel(models.Model):
     objects = models.Manager()
 
@@ -47,15 +52,16 @@ class Items(BaseModel):
     def get_absolute_url(self):
         return reverse("store:product-detail", kwargs={'slug': self.slug})
 
+    def get_add_to_cart_url(self):
+        return reverse("store:add-cart", kwargs={
+            'slug': self.slug
+        })
 
-class Order(BaseModel):
-    customer = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
-    date_ordered = models.DateTimeField(auto_now_add=True)
-    complete = models.BooleanField(default=False, null=True, blank=True)
-    transaction_id = models.CharField(max_length=100, null=True)
+    def get_remove_from_cart_url(self):
+        return reverse("store:remove-cart", kwargs={
+            'slug': self.slug
+        })
 
-    def __str__(self):
-        return str(self.transaction_id)
 
 
 class OrderItem(BaseModel):
@@ -65,7 +71,7 @@ class OrderItem(BaseModel):
 
 class ShippingAddress(BaseModel):
     name = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=500, null=True)
     city = models.CharField(max_length=100, null=True)
     state = models.CharField(max_length=100, null=True)

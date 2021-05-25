@@ -1,5 +1,4 @@
-from django.urls import path, re_path
-from django.views.static import serve
+from django.urls import path
 from .views import *
 from . import views
 app_name = 'store'
@@ -7,6 +6,9 @@ app_name = 'store'
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home-page'),
+    path('checkout', views.checkout, name='checkout-page'),
+    path('add-cart', views.add_to_cart, name='add-cart'),
+    path('remove-cart', views.remove_from_cart, name='remove-cart'),
     path('products', Product.as_view(), name='products-list'),
     path('product_detail/<slug>', ProductDetails.as_view(), name='product-detail'),
 ]
