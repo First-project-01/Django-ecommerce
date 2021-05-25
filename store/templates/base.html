@@ -69,7 +69,7 @@
                 <li class="nav-item"><a class="nav-link" href="checkout.html">Cart</a></li>
                 <li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'store:login-page' %}">Login</a></li>
                 {% endif %}
             </ul>
           </div>
