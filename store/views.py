@@ -18,7 +18,7 @@ class Product(ListView):
 
 class ProductDetails(DetailView):
     model = Items
-    template_name =  'product-details.html'
+    template_name = 'product-details.html'
 
 
 def register(request):
@@ -26,13 +26,10 @@ def register(request):
         form = UserRegisterForm()
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('fullname')
-            messages.success(request, f'Account created for {username}!')
-            return redirect('store:home-page')
+            #username = form.cleaned_data.get('fullname')
+            #messages.success(request, f'Account created for {username}!')
+            return redirect('store:login-page')
     else:
         form = UserRegisterForm()
     return render(request, 'register.html', {'form': form})
 
-
-def login(request):
-    return render(request, 'login.html')
