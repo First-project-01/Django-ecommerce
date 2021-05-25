@@ -1,4 +1,6 @@
-from django.urls import path
+from django.urls import path, re_path
+from django.conf import settings
+from django.views.static import serve
 from .views import *
 from . import views
 app_name = 'store'
@@ -10,3 +12,5 @@ urlpatterns = [
     path('product_detail/<slug>', ProductDetails.as_view(), name='product-detail'),
     path('register', views.register, name='register'),
 ]
+
+
