@@ -15,7 +15,7 @@
 						<th><h5>Items: <strong>{{order.get_total_items}}</strong></h5></th>
 						<th><h5>Total:<strong> Rs. {{order.get_total|floatformat:2}}</strong></h5></th>
 						<th>
-							<a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
+							<a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'store:checkout-page' %}">Checkout</a>
 						</th>
 					</tr>
 				</table>
@@ -34,8 +34,8 @@
 				{% for item in object_list %}
 				<div class="cart-row">
 					<!--<div style="flex:2"><img class="row-image" src="{{item.item.imageURL}}"></div>-->
-					<div style="flex:2"><p>{{item.product.title}}</p></div>
-					<div style="flex:1"><p>${{item.product.price|floatformat:2}}</p></div>
+					<div style="flex:2"><p>{{item.items.product.title}}</p></div>
+					<div style="flex:1"><p>Rs.{{item.items.product.price|floatformat:2}}</p></div>
 					<div style="flex:1">
 						<p class="quantity">{{item.items.product.quantity}}</p>
 						<div class="quantity">
@@ -43,7 +43,7 @@
 							<img class="chg-quantity" src="#">-->
 						</div>
 					</div>
-					<div style="flex:1"><p>${{item.get_total_item_price|floatformat:2}}</p></div>
+					<div style="flex:1"><p>Rs.{{item.items.product.get_total_item_price|floatformat:2}}</p></div>
 				</div>
 				{% endfor %}
 			</div>

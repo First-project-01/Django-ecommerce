@@ -80,9 +80,6 @@ class OrderItem(BaseModel):
     def get_total_discount_item_price(self):
         return self.quantity * self.product.discount_price
 
-    def get_amount_saved(self):
-        return self.get_total_item_price() - self.get_total_discount_item_price()
-
     def get_final_price(self):
         if self.product.discount_price:
             return self.get_total_discount_item_price()
