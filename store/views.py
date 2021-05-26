@@ -26,7 +26,7 @@ class ProductDetails(DetailView):
 
 
 def checkout(request):
-    return render (request, 'checkout.html')
+    return render(request, 'checkout.html', {'title': 'Checkout'})
 
 
 def register(request):
@@ -69,17 +69,17 @@ def add_to_cart(request, slug):
             order_item.quantity += 1
             order_item.save()
             messages.info(request, "This item quantity was updated.")
-            return redirect(reverse('store:product-detail', args=(item.slug,)))
+            return redirect(reverse('store:cart-page'))
         else:
             order.items.add(order_item)
             messages.info(request, "This item was added to your cart.")
-            return redirect(reverse('store:product-detail', args=(item.slug,)))
+            return redirect(reverse('store:cart-page'))
     else:
         ordered_date = timezone.now()
         order = Cart.objects.create(user=request.user, ordered_date=ordered_date)
         order.items.add(order_item)
         messages.info(request, "This item was added to your cart.")
-        return redirect(reverse('store:product-detail', args=(item.slug,)))
+        return redirect(reverse('store:cart-page'))
 
 
 @login_required
@@ -100,11 +100,41 @@ def remove_from_cart(request, slug):
             order.items.remove(order_item)
             order_item.delete()
             messages.info(request, "This item was removed from your cart.")
-            return redirect(reverse('store:product-detail', args=(item.slug,)))
+            return redirect(reverse('store:cart-page'))
         else:                                                           #change
             messages.info(request, "This item was not in your cart")
-            return redirect(reverse('store:product-detail'), args=(item.slug,))
+            return redirect(reverse('store:cart-page'))
     else:
         messages.info(request, "You do not have an active order")
-        return redirect(reverse('store:product-detail'), args=(item.slug,))
+        return redirect(reverse('store:cart-page'))
 
+
+@login_required
+def remove_single_item_from_cart(request, slug):
+    item = get_object_or_404(Items, slug=slug)
+    order_qs = Cart.objects.filter(
+        user=request.user,
+        ordered=False
+    )
+    if order_qs.exists():
+        order = order_qs[0]
+        # check if the order item is in the order
+        if order.items.filter(product__slug=item.slug).exists():
+            order_item = OrderItem.objects.filter(
+                product=item,
+                user=request.user,
+                ordered=False
+            )[0]
+            if order_item.quantity > 1:
+                order_item.quantity -= 1
+                order_item.save()
+            else:
+                order.items.remove(order_item)
+            messages.info(request, "This item quantity was updated.")
+            return redirect(reverse('store:cart-page'))
+        else:
+            messages.info(request, "This item was not in your cart")
+            return redirect(reverse('store:cart-page'))
+    else:
+        messages.info(request, "You do not have an active order")
+        return redirect(reverse('store:cart-page'))
