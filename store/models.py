@@ -3,7 +3,6 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.shortcuts import reverse
-from django.conf import settings
 
 
 AVAILABILITY = (
@@ -70,7 +69,7 @@ class OrderItem(BaseModel):
                              on_delete=models.CASCADE)
     product = models.ForeignKey(Items, on_delete=models.SET_NULL, null=True)
     ordered = models.BooleanField(default=False)
-    quantity = models.IntegerField(default=0, null=True, blank=True)
+    quantity = models.IntegerField(default=1)
 
     def __str__(self):
         return f"{self.quantity} of {self.product.title}"
@@ -97,12 +96,12 @@ class Cart(BaseModel):
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
-    shipping_address = models.ForeignKey(
-        'Address', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
-    billing_address = models.ForeignKey(
-        'Address', related_name='billing_address', on_delete=models.SET_NULL, blank=True, null=True)
-    payment = models.ForeignKey(
-        'Payment', on_delete=models.SET_NULL, blank=True, null=True)
+    #shipping_address = models.ForeignKey(
+        #'Address', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
+    #billing_address = models.ForeignKey(
+        #'Address', related_name='billing_address', on_delete=models.SET_NULL, blank=True, null=True)
+    #payment = models.ForeignKey(
+        #'Payment', on_delete=models.SET_NULL, blank=True, null=True)
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
@@ -113,8 +112,8 @@ class Cart(BaseModel):
 
     def get_total_items(self):
         total = 0
-        for _ in self.items.all():
-            total += 1
+        for item in self.items.all():
+            total = sum(item.quantity)
         return total
 
     def get_total(self):
@@ -130,12 +129,12 @@ class ShippingAddress(BaseModel):
     address = models.CharField(max_length=500, null=True)
     city = models.CharField(max_length=100, null=True)
     state = models.CharField(max_length=100, null=True)
-    pincode = models.IntegerField
+    pincode = models.IntegerField()
     address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
     default = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.username
+        return self.name.username
 
     class Meta:
         verbose_name_plural = 'Addresses'

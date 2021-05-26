@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block content %}
     <!-- Page Content -->
     <div class="page-heading about-heading header-text" style="background-image: url(static/images/heading-6-1920x500.jpg);">
       <div class="container">
@@ -146,7 +147,7 @@
       </div>
     </div>
 
-    <footer>
+   <!-- <footer>
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -156,7 +157,7 @@
           </div>
         </div>
       </div>
-    </footer>
+    </footer>-->
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -223,16 +224,4 @@
         </div>
       </div>
     </div>
-
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-
-    <!-- Additional Scripts -->
-    <script src="assets/js/custom.js"></script>
-    <script src="assets/js/owl.js"></script>
-  </body>
-
-</html>
+{% endblock content %}
