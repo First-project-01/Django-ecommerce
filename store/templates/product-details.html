@@ -50,7 +50,7 @@
               <br>
 
               <p class="lead">
-                <!--<small><del> $999.00</del></small>--><strong class="text-primary">Rs. {{ object.price }}</strong>
+                <!--<small><del> $999.00</del></small>--><strong class="text-primary">Rs. {{ object.price|floatformat:2 }}</strong>
               </p>
 
               <br>
@@ -82,8 +82,12 @@
                     </div>
 
                     <div class="col-sm-6">
-                      <a href="#" class="btn btn-primary btn-block">Add to Cart</a>
-                    </div>
+                        <!--<a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
+                          Add to cart<i class="fas fa-shopping-cart ml-1"></i>
+                        </a>-->
+                        <a href="{{ object.get_add_to_cart_url }}" class="btn btn-success btn-block">Add to Cart</a>
+                        <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-block">Remove from cart</a> <!-- check -->
+                        </div>
                   </div>
                 </div>
               </div>
@@ -107,7 +111,7 @@
                   <a href="{{ item.get_absolute_url }}"><img src="{% static 'images/product1.jpg' %}" alt=""></a>
                   <div class="down-content">
                     <a href="{{ item.get_absolute_url }}"><h4>{{ object.title }}</h4></a>
-                    <h6><!--<small><del>$999.00 </del></small>-->Rs.{{ object.price }}</h6>
+                    <h6><!--<small><del>$999.00 </del></small>-->Rs.{{ object.price|floatformat:2 }}</h6>
                     <p>{{ object.description }}</p>
                   </div>
                 </div>

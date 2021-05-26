@@ -10,6 +10,11 @@ AVAILABILITY = (
     ('N', 'Out of Stock'),
 )
 
+ADDRESS_CHOICES = {
+    ('S', 'Shipping'),
+    ('B', 'Billing')
+}
+
 class BaseModel(models.Model):
     objects = models.Manager()
 
@@ -19,7 +24,9 @@ class BaseModel(models.Model):
 
 class Profile(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email = models.EmailField()
+
+    def __str__(self):
+        return self.user.username
 
     @receiver(post_save, sender=User) #add this
     def create_user_profile(sender, instance, created, **kwargs):
@@ -37,6 +44,7 @@ class Items(BaseModel):
     description = models.TextField(max_length=200)
     label = models.CharField(choices=AVAILABILITY, default=AVAILABILITY[0][0], max_length=1)
     slug = models.SlugField(max_length=100)
+    discount_price = models.FloatField(blank=True, null=True)
     # image = models.ImageField()
 
     def __str__(self):
@@ -45,35 +53,89 @@ class Items(BaseModel):
     def get_absolute_url(self):
         return reverse("store:product-detail", kwargs={'slug': self.slug})
 
+    def get_add_to_cart_url(self):
+        return reverse("store:add-cart", kwargs={
+            'slug': self.slug
+        })
 
-class Order(BaseModel):
-    customer = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
-    date_ordered = models.DateTimeField(auto_now_add=True)
-    complete = models.BooleanField(default=False, null=True, blank=True)
-    transaction_id = models.CharField(max_length=100, null=True)
-
-    def __str__(self):
-        return str(self.transaction_id)
+    def get_remove_from_cart_url(self):
+        return reverse("store:remove-cart", kwargs={
+            'slug': self.slug
+        })
 
 
 class OrderItem(BaseModel):
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE)
     product = models.ForeignKey(Items, on_delete=models.SET_NULL, null=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
-    quantity = models.IntegerField(default=0, null=True, blank=True)
+    ordered = models.BooleanField(default=False)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.quantity} of {self.product.title}"
+
+    def get_total_item_price(self):
+        return self.quantity * self.product.price
+
+    def get_total_discount_item_price(self):
+        return self.quantity * self.product.discount_price
+
+    def get_final_price(self):
+        if self.product.discount_price:
+            return self.get_total_discount_item_price()
+        return self.get_total_item_price()
+
+
+class Cart(BaseModel):
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE)
+    items = models.ManyToManyField(OrderItem)
+    start_date = models.DateTimeField(auto_now_add=True)
+    ordered_date = models.DateTimeField()
+    ordered = models.BooleanField(default=False)
+    #shipping_address = models.ForeignKey(
+        #'Address', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
+    #billing_address = models.ForeignKey(
+        #'Address', related_name='billing_address', on_delete=models.SET_NULL, blank=True, null=True)
+    #payment = models.ForeignKey(
+        #'Payment', on_delete=models.SET_NULL, blank=True, null=True)
+    being_delivered = models.BooleanField(default=False)
+    received = models.BooleanField(default=False)
+    refund_requested = models.BooleanField(default=False)
+    refund_granted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
+
+    def get_total_items(self):
+        total = 0
+        for item in self.items.all():
+            total = sum(item.quantity)
+        return total
+
+    def get_total(self):
+        total = 0
+        for order_item in self.items.all():
+            total += order_item.get_final_price()
+        return total
+
 
 class ShippingAddress(BaseModel):
     name = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=500, null=True)
     city = models.CharField(max_length=100, null=True)
     state = models.CharField(max_length=100, null=True)
     pincode = models.IntegerField()
+    address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
+    default = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.address)
+        return self.name.username
 
-class Payment(BaseModel):
-    pass
+    class Meta:
+        verbose_name_plural = 'Addresses'
+
 
 
 class Refund(BaseModel):
