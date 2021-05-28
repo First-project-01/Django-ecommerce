@@ -2,6 +2,7 @@
 {% block content %}
 {% load static %}
 <!-- Page Content -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <div class="page-heading about-heading header-text" style="background-image: url(static/images/heading-6-1920x500.jpg);">
       <div class="container">
         <div class="row">
@@ -12,6 +13,18 @@
           </div>
         </div>
       </div>
+    </div>
+	<div class="mt-5 pt-4">
+    	{% if messages %}
+        	{% for message in messages %}
+        	<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          	{{ message }}
+          	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            	<span aria-hidden="true">&times;</span>
+          	</button>
+        	</div>
+        	{% endfor %}
+    	{% endif %}
     </div>
 <div class="container">
 	<div class="row">
@@ -34,11 +47,18 @@
 					{% for order_item in object.items.all %}
 					<tr>
 						<th scope="row">{{ forloop.counter }}</th>
-						<td>{{ order_item.product.title }}</td>
+						<td>
+							<a href="{% url 'store:product-detail' order_item.product.slug%}">{{ order_item.product.title }}</a>
+						</td>
 						<td>{{ order_item.product.price|floatformat:2 }}</td>
 						<td>
+							<a href="{% url 'store:remove-single' order_item.product.slug %}">
+								<i class="fas fa-minus" style="color:#000;" aria-hidden="true"></i>
+							</a>
 							{{ order_item.quantity }}
-							<a href="{% url 'store:add-cart' order_item.product.slug %}"><i class="fas fa-plus ml-2"></i></a>
+							<a href="{% url 'store:add-cart' order_item.product.slug %}">
+								<i class="fas fa-plus" style="color:#000;" aria-hidden="true"></i>
+							</a>
 						</td>
 						<td>
 						{% if order_item.product.discount_price %}

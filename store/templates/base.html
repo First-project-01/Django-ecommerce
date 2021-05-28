@@ -23,7 +23,6 @@
   </head>
 
   <body>
-
     <!-- ***** Preloader Start ***** -->
     <div id="preloader">
         <div class="jumper">
@@ -33,36 +32,31 @@
         </div>
     </div>
     <!-- ***** Preloader End ***** -->
-
     <!-- Header -->
     <header class="">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="{% url 'store:home-page' %}"><h2>AH <em>Decor</em></h2></a>
+            <ul><a class="navbar-brand" href="{% url 'store:home-page' %}">
+                <li><img src="{% static 'images/small_logo.jpeg' %}" width="60" alt=""></li></a>
+            </ul>
+          <a class="navbar-brand" href="{% url 'store:home-page' %}">
+              <h2> <em>Anju's</em> Home <em>Decor</em></h2></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <!--<div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                      <a class="nav-link" href="{% url 'store:home-page' %}">Home
-                      <span class="sr-only">(current)</span>
-                    </a>
-                </li>-->
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
                     <span class="sr-only">(current)</span>
                 </li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
-                    <!--<span class="sr-only">(current)</span>-->
+                    <span class="sr-only">(current)</span>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="{static 'about-us.html' %}">About Us</a>
-                      <a class="dropdown-item" href="{static 'blog.html' %}">Blog</a>
-                      <a class="dropdown-item" href="{static 'contact.html' %}">Contact Us</a>
-                      <a class="dropdown-item" href="{static 'terms.html' %}">Terms</a>
+                      <a class="dropdown-item" href="{% url 'store:about-us' %}">About Us</a>
+                      <a class="dropdown-item" href="{% url 'store:blogs' %}">Blog</a>
+                      <a class="dropdown-item" href="{% url 'store:contact-us' %}">Contact Us</a>
+                      <a class="dropdown-item" href="{% url 'store:terms' %}">Terms & Conditions</a>
                     </div>
                 </li>
                 {% if request.user.is_authenticated %}
@@ -76,8 +70,9 @@
         </div>
       </nav>
     </header>
-   {% block content %} {% endblock content %}
-     <div class="call-to-action">
+    {% block content %}
+    {% endblock content %}
+    <footer><div class="call-to-action">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -88,14 +83,14 @@
                   <p>We value customers' feedback the most. Kindly reach out to us for any assistance.</p>
                 </div>
                 <div class="col-lg-4 col-md-6 text-right">
-                  <a href="contact.html" class="filled-button">Contact Us</a>
+                  <a href="{% url 'store:contact-us' %}" class="filled-button">Contact Us</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div></footer>
     <br>
     <br>
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>

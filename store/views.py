@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from .models import *
+from django.http import HttpResponse
 
 
 class HomeView(ListView):
@@ -34,8 +35,8 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            #username = form.cleaned_data.get('fullname')
-            #messages.success(request, f'Account created for {username}!')
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}!')
             return redirect(reverse('store:home-page'))
     else:
         form = UserRegisterForm()
@@ -138,3 +139,15 @@ def remove_single_item_from_cart(request, slug):
     else:
         messages.info(request, "You do not have an active order")
         return redirect(reverse('store:cart-page'))
+
+def about_us(request):
+    return render(request, 'about-us.html')
+
+def contact_us(request):
+    return render(request, 'contact.html')
+
+def blogs(request):
+    return render(request, 'blog.html')
+
+def terms(request):
+    return render(request, 'terms.html')
