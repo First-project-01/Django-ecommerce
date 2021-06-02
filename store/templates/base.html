@@ -34,13 +34,15 @@
     <!-- ***** Preloader End ***** -->
     <!-- Header -->
     <header class="">
-      <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <ul><a class="navbar-brand" href="{% url 'store:home-page' %}">
-                <li><img src="{% static 'images/small_logo.jpeg' %}" width="60" alt=""></li></a>
-            </ul>
+      <nav class="navbar navbar-expand-lg" style="padding-top:10px;">
+        <div class="container-fluid">
+            <!-- <a class="navbar-brand brand-logo" href="{% url 'store:home-page' %}">
+              <img src="{% static 'images/small_logo.jpeg' %}" width="60" alt=""></a> -->
+
+              <a href="{% url 'store:home-page' %}"><img src="{% static 'images/small_logo.jpeg' %}" width="60" alt="" class="brand-logo"></a>
+
           <a class="navbar-brand" href="{% url 'store:home-page' %}">
-              <h2> <em>Anju's</em> Home <em>Decor</em></h2></a>
+              <h2 class="website-header"> <em class="web-h1">Anju's</em> <span class="web-h1">Home </span><em class="web-h1">Decor</em></h2></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -79,7 +81,7 @@
             <div class="inner-content">
               <div class="row">
                 <div class="col-md-8">
-                  <h4>Anju's Home Decor </h4>
+                  <h4 style="color:#cd9921">Anju's Home Decor </h4>
                   <p>We value customers' feedback the most. Kindly reach out to us for any assistance.</p>
                 </div>
                 <div class="col-lg-4 col-md-6 text-right">
@@ -93,6 +95,45 @@
     </div></footer>
     <br>
     <br>
+    <style>
+    .website-header{
+      padding-top:10px;
+    }
+    .brand-logo{
+      padding-right: 10px;
+    }
+      @media only screen and (max-width:993px){
+        .website-header{
+           padding-left: 50px;
+           padding-top:0;
+        }
+        .brand-logo{
+          margin-top: 5px;
+          margin-left:20px;
+        }
+      }
+      @media only screen and (max-width:437px){
+        /* .navbar .navbar-brand h2{
+          font-size: 15px;
+        } */
+        .web-h1{
+          font-size: 1.2rem;
+        }
+        .navbar-toggler-icon{
+          padding-top: 2px;
+          padding-left: 10px;
+        }
+      }
+</style>
+
+
+      <script>
+      if(screen.width<993){
+        document.getElementById("website-header").innerHTML="AHD";
+      }
+
+      </script>
+
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <!-- Additional Scripts -->
