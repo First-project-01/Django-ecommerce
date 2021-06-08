@@ -34,39 +34,20 @@
     <!-- ***** Preloader End ***** -->
     <!-- Header -->
     <header class="">
-      <nav class="navbar navbar-expand-lg" style="padding-top:10px;">
+      <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <!-- <a class="navbar-brand brand-logo" href="{% url 'store:home-page' %}">
               <img src="{% static 'images/small_logo.jpeg' %}" width="60" alt=""></a> -->
-
-              <a href="{% url 'store:home-page' %}"><img src="{% static 'images/small_logo.jpeg' %}" width="60" alt="" class="brand-logo"></a>
-
-          <a class="navbar-brand" href="{% url 'store:home-page' %}">
-              <h2 class="website-header"> <em class="web-h1">Anju's</em> <span class="web-h1">Home </span><em class="web-h1">Decor</em></h2></a>
+            <a href="{% url 'store:home-page' %}"><img src="{% static 'images/small_logo.jpeg' %}" width="60" alt="" class="brand-logo"></a>
+            <a class="navbar-brand" href="{% url 'store:home-page' %}">
+                <h2 class="website-header"> <em class="web-h1">Anju's</em> <span class="web-h1">Home </span><em class="web-h1">Decor</em></h2></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
-                    <span class="sr-only">(current)</span>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
-                    <span class="sr-only">(current)</span>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="{% url 'store:about-us' %}">About Us</a>
-                      <a class="dropdown-item" href="{% url 'store:blogs' %}">Blog</a>
-                      <a class="dropdown-item" href="{% url 'store:contact-us' %}">Contact Us</a>
-                      <a class="dropdown-item" href="{% url 'store:terms' %}">Terms & Conditions</a>
-                    </div>
-                </li>
-                {% if request.user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'store:cart-page'%}">Cart</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'logout-page' %}">Logout</a></li>
-                {% else %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'login-page' %}">Login</a></li>
-                {% endif %}
+                {% block toggler %}
+                {% endblock toggler %}
             </ul>
           </div>
         </div>
