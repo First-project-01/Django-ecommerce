@@ -10,11 +10,6 @@ AVAILABILITY = (
     ('N', 'Out of Stock'),
 )
 
-ADDRESS_CHOICES = {
-    ('S', 'Shipping'),
-    ('B', 'Billing')
-}
-
 class BaseModel(models.Model):
     objects = models.Manager()
 
@@ -93,12 +88,10 @@ class Cart(BaseModel):
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
-    #shipping_address = models.ForeignKey(
-        #'Address', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
-    #billing_address = models.ForeignKey(
-        #'Address', related_name='billing_address', on_delete=models.SET_NULL, blank=True, null=True)
-    #payment = models.ForeignKey(
-        #'Payment', on_delete=models.SET_NULL, blank=True, null=True)
+    shipping_address = models.ForeignKey(
+        'Address', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
+    payment = models.ForeignKey(
+        'Payment', on_delete=models.SET_NULL, blank=True, null=True)
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
@@ -120,18 +113,17 @@ class Cart(BaseModel):
         return total
 
 
-class ShippingAddress(BaseModel):
-    name = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
-    order = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
+class Address(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     address = models.CharField(max_length=500, null=True)
+    phone = models.CharField(max_length=10, null=False)
     city = models.CharField(max_length=100, null=True)
     state = models.CharField(max_length=100, null=True)
-    pincode = models.IntegerField()
-    address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
+    pincode = models.CharField(max_length=100, null=False)
     default = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name.username
+        return self.user.username
 
     class Meta:
         verbose_name_plural = 'Addresses'
@@ -139,4 +131,19 @@ class ShippingAddress(BaseModel):
 
 
 class Refund(BaseModel):
-    pass
+    order = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    reason = models.TextField()
+    accepted = models.BooleanField(default=False)
+    email = models.EmailField()
+
+    def __str__(self):
+        return f"{self.pk}"
+
+class Payment(BaseModel):
+    user = models.ForeignKey(User,
+                             on_delete=models.SET_NULL, blank=True, null=True)
+    amount = models.FloatField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username

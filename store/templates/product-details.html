@@ -45,18 +45,18 @@
           </div>
             <div class="col-md-8 col-xs-12">
             <form action="#" method="post" class="form">
-              <h2>{{ object.title }}</h2>
+              <h2>{{ items.title }}</h2>
 
               <br>
 
               <p class="lead">
-                <!--<small><del> $999.00</del></small>--><strong class="text-primary">Rs. {{ object.price|floatformat:2 }}</strong>
+                <!--<small><del> $999.00</del></small>--><strong class="text-primary">Rs. {{ items.price|floatformat:2 }}</strong>
               </p>
 
               <br>
 
               <p class="lead">
-                {{ object.description }}
+                {{ items.description }}
               </p>
               <br>
 
@@ -77,7 +77,7 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="1">
+                        <input type="number" class="form-control" placeholder="1">
                       </div>
                     </div>
 
@@ -85,8 +85,8 @@
                         <!--<a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
                           Add to cart<i class="fas fa-shopping-cart ml-1"></i>
                         </a>-->
-                        <a href="{{ object.get_add_to_cart_url }}" class="btn btn-success btn-block">Add to Cart</a>
-                        <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-block">Remove from cart</a> <!-- check -->
+                        <a href="{{ items.get_add_to_cart_url }}" class="btn btn-success btn-block">Add to Cart</a>
+                        <a href="{{ items.get_remove_from_cart_url }}" class="btn btn-danger btn-block">Remove from cart</a> <!-- check -->
                         </div>
                   </div>
                 </div>
@@ -110,9 +110,9 @@
                 <div class="product-item">
                   <a href="{{ item.get_absolute_url }}"><img src="{% static 'images/product1.jpg' %}" alt=""></a>
                   <div class="down-content">
-                    <a href="{{ item.get_absolute_url }}"><h4>{{ object.title }}</h4></a>
-                    <h6><!--<small><del>$999.00 </del></small>-->Rs.{{ object.price|floatformat:2 }}</h6>
-                    <p>{{ object.description }}</p>
+                    <a href="{{ item.get_absolute_url }}"><h4>{{ items.title }}</h4></a>
+                    <h6><!--<small><del>$999.00 </del></small>-->Rs.{{ items.price|floatformat:2 }}</h6>
+                    <p>{{ items.description }}</p>
                   </div>
                 </div>
               </div>

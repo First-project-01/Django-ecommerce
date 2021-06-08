@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
     <!-- Page Content -->
     <div class="page-heading about-heading header-text" style="background-image: url(static/images/heading-6-1920x500.jpg);">
@@ -24,9 +25,9 @@
                   </div>
                   
                   <div class="col-6 text-right">
-                       <strong>$ 128.00</strong>
+                       <strong>Rs. {{ items.get_total }}</strong>
                   </div>
-             </div>
+            </div>
           </li>
 
         </ul>
@@ -35,26 +36,14 @@
         
         <div class="inner-content">
           <div class="contact-form">
-              <form action="#">
+              <form method="POST">
+                  {% csrf_token %}
                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                             <div class="form-group">
-                                  <label class="control-label">Name:</label>
-                                  <input type="text" class="form-control">
-                             </div>
-                        </div>
-                   </div>
-                   <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                             <div class="form-group">
-                                  <label class="control-label">Email:</label>
-                                  <input type="text" class="form-control">
-                             </div>
-                        </div>
                         <div class="col-sm-6 col-xs-12">
                              <div class="form-group">
                                   <label class="control-label">Phone:</label>
-                                  <input type="text" class="form-control">
+                                  <!--<input type="text" class="form-control">-->
+                                  {{ form.phone }}
                              </div>
                         </div>
                    </div>
@@ -62,27 +51,21 @@
                         <div class="col-sm-6 col-xs-12">
                              <div class="form-group">
                                   <label class="control-label">Address 1:</label>
-                                  <input type="text" class="form-control">
+                                  {{ form.address }}
                              </div>
                         </div>
-                        <!--<div class="col-sm-6 col-xs-12">
-                             <div class="form-group">
-                                  <label class="control-label">Address 2:</label>
-                                  <input type="text" class="form-control">
-                             </div>
-                        </div>-->
                    </div>
                    <div class="row">
                         <div class="col-sm-6 col-xs-12">
                              <div class="form-group">
                                   <label class="control-label">City:</label>
-                                  <input type="text" class="form-control">
+                                  {{ form.city }}
                              </div>
                         </div>
                         <div class="col-sm-6 col-xs-12">
                              <div class="form-group">
                                   <label class="control-label">State:</label>
-                                  <input type="text" class="form-control">
+                                  {{ form.state }}
                              </div>
                         </div>
                    </div>
@@ -90,52 +73,41 @@
                         <div class="col-sm-6 col-xs-12">
                              <div class="form-group">
                                   <label class="control-label">Zip:</label>
-                                  <input type="text" class="form-control">
+                                  {{ form.zip }}
                              </div>
                         </div>
                         <div class="col-sm-6 col-xs-12">
                              <div class="form-group">
                                   <label class="control-label">Country:</label>
                                   <select class="form-control">
-                                       <option value="">-- Choose --</option>
-                                       <option value="">-- Choose --</option>
-                                       <option value="">-- Choose --</option>
-                                       <option value="">-- Choose --</option>
+                                       <option value="">India</option>
                                   </select>
                              </div>
                         </div>
-                   </div>
-
-                   <div class="row">
                         <div class="col-sm-6 col-xs-12">
-                             <div class="form-group">
-                                  <label class="control-label">Payment method</label>
-
-                                  <select class="form-control">
-                                       <option value="">-- Choose --</option>
-                                       <option value="bank">Bank account</option>
-                                       <option value="cash">Cash</option>
-                                       <option value="paypal">PayPal</option>
-                                  </select>
-                             </div>
+                          {% for value, name in form.fields.payment.choices %}
+                            <div class="custom-control custom-radio">
+                              <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input" required>
+                              <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
+                            </div>
+                          {% endfor %}
                         </div>
-
-                        <div class="col-sm-6 col-xs-12">
-                             <div class="form-group">
-                                  <label class="control-label">Captcha</label>
-                                  <input type="text" class="form-control">
-                             </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" name="set_default_shipping" id="set_default_shipping">
+                          <label class="custom-control-label" for="set_default_shipping">Save as default shipping address</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="control-input">
+                          <label class="control-label">I agree with the <a href="{% url 'store:terms' %}" target="_blank">Terms &amp; Conditions</a></label>
                         </div>
                    </div>
 
-                   <div class="form-group">
-                        <label class="control-label">
-                             <input type="checkbox">
-
-                             I agree with the <a href="terms.html" target="_blank">Terms &amp; Conditions</a>
-                        </label>
-                   </div>
-
+                    {% if default_shipping_address %}
+                    <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="use_default_shipping" id="use_default_shipping">
+                    <label class="custom-control-label" for="use_default_shipping">Use default shipping address: {{ default_shipping_address.street_address|truncatechars:10 }}</label>
+                    </div>
+                    {% endif %}
                    <div class="clearfix">
                         <button class="filled-button pull-left" type="button">
                             <a href="{% url 'store:cart-page' %}" >Back</a>
