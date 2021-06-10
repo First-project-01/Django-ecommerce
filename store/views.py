@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import *
+from .forms import UserRegisterForm, CheckoutForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
@@ -7,6 +7,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from .models import *
+from django.http import HttpResponse
+
+
+def payment(request):
+    return HttpResponse('Payment Page')
 
 
 class HomeView(ListView):
@@ -16,19 +21,13 @@ class HomeView(ListView):
 
 class Product(ListView):
     model = Items
-    paginate_by = 8
+    paginate_by = 10
     template_name = 'products.html'
 
 
 class ProductDetails(DetailView):
-    context_object_name = 'items'
+    model = Items
     template_name = 'product-details.html'
-    queryset = Items.objects.all()
-
-    def get_context_data(self, **kwargs):
-        context = super(ProductDetails, self).get_context_data(**kwargs)
-        context['order-item'] = OrderItem.objects.all()
-        return context
 
 
 class CheckoutView(View):
@@ -47,20 +46,20 @@ class CheckoutView(View):
             )
             if shipping_address_qs.exists():
                 context.update(
-                    {'default_shipping_address': shipping_address_qs[0]})
+                    {'default_address': shipping_address_qs[0]})
             return render(self.request, "checkout.html", context)
         except ObjectDoesNotExist:
             messages.info(self.request, "You do not have an active order")
-            return redirect("store:cart-page")
+            return redirect(reverse('store:cart-page'))
 
     def post(self, *args, **kwargs):
         form = CheckoutForm(self.request.POST)
         try:
             order = Cart.objects.get(user=self.request.user, ordered=False)
             if form.is_valid():
-                use_default_shipping = form.cleaned_data.get(
-                    'use_default_shipping')
-                if use_default_shipping:
+                use_default = form.cleaned_data.get(
+                    'use_default')
+                if use_default:
                     address_qs = Address.objects.filter(
                         user=self.request.user,
                         default=True
@@ -74,7 +73,7 @@ class CheckoutView(View):
                             self.request, "No default shipping address available")
                         return redirect('store:checkout-page')
                 else:
-                    address1 = form.cleaned_data.get(
+                    address = form.cleaned_data.get(
                         'address')
                     pincode = form.cleaned_data.get('zip')
                     phone = form.cleaned_data.get('phone')
@@ -83,41 +82,29 @@ class CheckoutView(View):
                     if form.is_valid():
                         shipping_address = Address(
                             user=self.request.user,
-                            address=address1,
+                            address=address,
                             pincode=pincode,
                             state=state,
                             city=city,
                             phone=phone
                         )
                         shipping_address.save()
-
                         order.shipping_address = shipping_address
                         order.save()
 
-                        set_default_shipping = form.cleaned_data.get(
-                            'set_default_shipping')
-                        if set_default_shipping:
+                        set_default = form.cleaned_data.get(
+                            'set_default')
+                        if set_default:
                             shipping_address.default = True
                             shipping_address.save()
 
                     else:
                         messages.info(
                             self.request, "Please fill in the required shipping address fields")
-                payment_option = form.cleaned_data.get('payment')
-                if payment_option == 'C':
-                    return redirect('store:payment', payment_option='credit')
-                elif payment_option == 'D':
-                    return redirect('store:payment', payment_option='debit')
-                else:
-                    messages.warning(
-                        self.request, "Invalid payment option selected")
-                    return redirect('store:checkout-page')
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
-            return redirect("store:cart-page")
-
-
-#class Payment(View):
+            return redirect(reverse('store:cart-page'))
+        return redirect(reverse('store:payment-page'))
 
 
 def register(request):
@@ -127,7 +114,7 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}!')
-            return redirect(reverse('login-page'))
+            return redirect(reverse('store:home-page'))
     else:
         form = UserRegisterForm()
     return render(request, 'register.html', {'form': form})

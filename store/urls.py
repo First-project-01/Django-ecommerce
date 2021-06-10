@@ -14,7 +14,7 @@ urlpatterns = [
     path('product_detail/<slug>', ProductDetails.as_view(), name='product-detail'),
     path('remove-item-from-cart/<slug>/', remove_single_item_from_cart,
          name='remove-single'),
-    #path('payment/<payment_option>/', Payment.as_view(), name='payment'),
+    path('payment', views.payment, name='payment-page'),
     path('about-us', views.about_us, name='about-us'),
     path('contact-us', views.contact_us, name='contact-us'),
     path('blogs', views.blogs, name='blogs'),

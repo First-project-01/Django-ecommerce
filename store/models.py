@@ -39,7 +39,7 @@ class Items(BaseModel):
     description = models.TextField(max_length=200)
     label = models.CharField(choices=AVAILABILITY, default=AVAILABILITY[0][0], max_length=1)
     slug = models.SlugField(max_length=100)
-    discount_price = models.FloatField(blank=True, null=True)
+    discount_price = models.FloatField(max_length=100, blank=True, null=True)
     # image = models.ImageField()
 
     def __str__(self):
@@ -89,9 +89,9 @@ class Cart(BaseModel):
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
     shipping_address = models.ForeignKey(
-        'Address', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
-    payment = models.ForeignKey(
-        'Payment', on_delete=models.SET_NULL, blank=True, null=True)
+        'Address', on_delete=models.SET_NULL, blank=True, null=True)
+    #payment = models.ForeignKey(
+        #'Payment', on_delete=models.SET_NULL, blank=True, null=True)
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
@@ -120,7 +120,7 @@ class Address(BaseModel):
     city = models.CharField(max_length=100, null=True)
     state = models.CharField(max_length=100, null=True)
     pincode = models.CharField(max_length=100, null=False)
-    default = models.BooleanField(default=False)
+    default = models.BooleanField(default=False, null=True, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -131,19 +131,7 @@ class Address(BaseModel):
 
 
 class Refund(BaseModel):
-    order = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    reason = models.TextField()
-    accepted = models.BooleanField(default=False)
-    email = models.EmailField()
-
-    def __str__(self):
-        return f"{self.pk}"
+    pass
 
 class Payment(BaseModel):
-    user = models.ForeignKey(User,
-                             on_delete=models.SET_NULL, blank=True, null=True)
-    amount = models.FloatField()
-    timestamp = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.user.username
+    pass

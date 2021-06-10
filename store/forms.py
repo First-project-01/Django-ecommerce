@@ -19,9 +19,8 @@ class UserRegisterForm(UserCreationForm):
 class CheckoutForm(forms.Form):
     phone = forms.CharField(max_length=10)
     address = forms.CharField(max_length=500)
-    set_default_shipping = forms.BooleanField(required=False)
-    use_default_shipping = forms.BooleanField(required=False)
+    set_default = forms.BooleanField(required=False)
+    use_default = forms.BooleanField(required=False)
     zip = forms.CharField()
     city = forms.CharField()
     state = forms.CharField()
-    payment = forms.ChoiceField(widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
