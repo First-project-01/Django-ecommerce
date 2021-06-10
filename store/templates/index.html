@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block toggler %}
-        <li class="nav-item active"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
+        <li class="nav-item"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
                     <span class="sr-only">(current)</span>
         </li>
         <li class="nav-item dropdown">
@@ -60,7 +60,7 @@
               <a href="{{ item.get_absolute_url }}"><img src="{% static 'images/product1.jpg' %}" alt=""></a>
               <div class="down-content">
                 <a href="{{ item.get_absolute_url }}"><h4>{{ item.title }}</h4></a>
-                <!--<h6><small><del>$999.00 </del></small>-->Rs.{{ item.price }}</h6>
+                <!--<h6><small><del>$999.00 </del></small>--><h6>Rs.{{ item.price }}</h6>
                 <p>{{ item.description }}</p>
               </div>
             </div>
