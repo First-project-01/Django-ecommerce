@@ -1,6 +1,27 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
+{% block toggler %}
+   		<li class="nav-item"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
+                    <span class="sr-only">(current)</span>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
+			<span class="sr-only">(current)</span>
+			<div class="dropdown-menu">
+			  <a class="dropdown-item" href="{% url 'store:about-us' %}">About Us</a>
+			  <a class="dropdown-item" href="{% url 'store:blogs' %}">Blog</a>
+			  <a class="dropdown-item" href="{% url 'store:contact-us' %}">Contact Us</a>
+			  <a class="dropdown-item" href="{% url 'store:terms' %}">Terms & Conditions</a>
+			</div>
+		</li>
+		{% if request.user.is_authenticated %}
+		<li class="nav-item active"><a class="nav-link" href="{% url 'store:cart-page'%}">Cart</a></li>
+		<li class="nav-item"><a class="nav-link" href="{% url 'logout-page' %}">Logout</a></li>
+		{% else %}
+		<li class="nav-item"><a class="nav-link" href="{% url 'login-page' %}">Login</a></li>
+		{% endif %}
+{% endblock toggler %}
+{% block content %}
 <!-- Page Content -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <div class="page-heading about-heading header-text" style="background-image: url(static/images/heading-6-1920x500.jpg);">
@@ -39,7 +60,7 @@
 						<th scope="col">No.</th>
 						<th scope="col">Name</th>
 						<th scope="col">Price</th>
-						<th scope="col">Quantity</th>
+						<th scope="col" style="text-align:center;">Quantity</th>
 						<th scope="col">Total Price</th>
 					</tr>
 					</thead>
@@ -51,13 +72,13 @@
 							<a href="{% url 'store:product-detail' order_item.product.slug%}">{{ order_item.product.title }}</a>
 						</td>
 						<td>{{ order_item.product.price|floatformat:2 }}</td>
-						<td>
+						<td style="text-align:center;">
 							<a href="{% url 'store:remove-single' order_item.product.slug %}">
-								<i class="fas fa-minus" style="color:#000;" aria-hidden="true"></i>
+								<i class="fas fa-minus fa-xs" style="color:#000;font-size:10px;" aria-hidden="true"></i>
 							</a>
 							{{ order_item.quantity }}
 							<a href="{% url 'store:add-cart' order_item.product.slug %}">
-								<i class="fas fa-plus" style="color:#000;" aria-hidden="true"></i>
+								<i class="fas fa-plus fa-xs" style="color:#000;font-size:10px;" aria-hidden="true"></i>
 							</a>
 						</td>
 						<td>
@@ -77,7 +98,7 @@
 					</tr>
 					<tr>
 						<td colspan="5">
-						<a class='btn btn-primary float-right' href="{% url 'store:home-page' %}">Continue shopping</a>
+						<!-- <a class='btn btn-primary float-right' href="{% url 'store:home-page' %}">Continue shopping</a> -->
 						</td>
 					</tr>
 					{% endfor %}
@@ -91,7 +112,7 @@
 				 </table>
 				<br>
 				<br>
-				<a  style="float:left; margin:5px;" class="btn btn-success" href="{% url 'store:products-list' %}">Continue Shopping</a>
+				<a  style="float:left; margin:5px;" class="btn btn-outline-warning" href="{% url 'store:products-list' %}">Continue Shopping</a>
 				<a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'store:checkout-page' %}">Checkout</a>
 			</div>
 		</div>

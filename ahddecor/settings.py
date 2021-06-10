@@ -59,6 +59,12 @@ TEMPLATES = [
     },
 ]
 
+#AUTHENTICATION_BACKENDS = [
+#   'django.contrib.auth.backends.ModelBackend',
+#    'account.authentication.EmailAuthBackend',
+ #   'social_core.backends.google.GoogleOAuth2',
+#]
+
 WSGI_APPLICATION = 'ahddecor.wsgi.application'
 
 
@@ -120,3 +126,8 @@ LOGIN_REDIRECT_URL = 'store:home-page'
 LOGOUT_REDIRECT_URL = 'store:home-page'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_URL = 'login-page'
+
+#SOCIAL_AUTH_URL_NAMESPACE = "store:social"
+
+#SOCIAL_AUTH_GOOGLE_KEY = '703423017916-nfdd02c6soli25mbd9e177911aesqnjd.apps.googleusercontent.com'
+#SOCIAL_AUTH_GOOGLE_SECRET = 'iLsKsFd7I1w0Wxj5-EV5K5pJ'

@@ -1,5 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block toggler %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
+                    <span class="sr-only">(current)</span>
+        </li>
+        <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
+            <span class="sr-only">(current)</span>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'store:about-us' %}">About Us</a>
+              <a class="dropdown-item" href="{% url 'store:blogs' %}">Blog</a>
+              <a class="dropdown-item" href="{% url 'store:contact-us' %}">Contact Us</a>
+              <a class="dropdown-item" href="{% url 'store:terms' %}">Terms & Conditions</a>
+            </div>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'store:cart-page'%}">Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'logout-page' %}">Logout</a></li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'login-page' %}">Login</a></li>
+        {% endif %}
+{% endblock toggler %}
 {% block content %}
     <!-- Page Content -->
     <div class="page-heading about-heading header-text" style="background-image: url(assets/images/heading-5-1920x500.jpg);">

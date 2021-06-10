@@ -1,5 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block toggler %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
+                    <span class="sr-only">(current)</span>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
+            <span class="sr-only">(current)</span>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'store:about-us' %}">About Us</a>
+              <a class="dropdown-item" href="{% url 'store:blogs' %}">Blog</a>
+              <a class="dropdown-item" href="{% url 'store:contact-us' %}">Contact Us</a>
+              <a class="dropdown-item" href="{% url 'store:terms' %}">Terms & Conditions</a>
+            </div>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'store:cart-page'%}">Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'logout-page' %}">Logout</a></li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'login-page' %}">Login</a></li>
+        {% endif %}
+{% endblock toggler %}
 {% block content %}
 <!-- Page Content -->
     <!-- Banner Starts Here -->
@@ -7,17 +28,17 @@
       <div class="owl-banner owl-carousel">
         <div class="banner-item-01">
           <div class="text-content">
-            <h2>Where Quality Matches Expectations</h2>
+            <h2 style="color:#34282C;font-weight:bold">Where Quality Matches Expectations</h2>
           </div>
         </div>
         <div class="banner-item-02">
           <div class="text-content">
-            <h2>Beauty comes with variety</h2>
+            <h2 style="color:#34282C;font-weight:bold">Beauty comes with variety</h2>
           </div>
         </div>
         <div class="banner-item-03">
           <div class="text-content">
-            <h2>Get what you want today!</h2>
+            <h2 style="color:white;font-weight:bold">Get what you want today!</h2>
           </div>
         </div>
       </div>
@@ -39,7 +60,7 @@
               <a href="{{ item.get_absolute_url }}"><img src="{% static 'images/product1.jpg' %}" alt=""></a>
               <div class="down-content">
                 <a href="{{ item.get_absolute_url }}"><h4>{{ item.title }}</h4></a>
-                <!--<h6><small><del>$999.00 </del></small>-->Rs.{{ item.price }}</h6>
+                <!--<h6><small><del>$999.00 </del></small>--><h6>Rs.{{ item.price }}</h6>
                 <p>{{ item.description }}</p>
               </div>
             </div>
@@ -94,7 +115,7 @@
               <a href="#" class="services-item-image"><img src="static/images/blog-1-370x270.jpg" class="img-fluid" alt=""></a>
 
               <div class="down-content">
-                <h4><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit hic</a></h4>
+                <h4><a href="#" style="color:#806200">Lorem ipsum dolor sit amet, consectetur adipisicing elit hic</a></h4>
 
                 <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>
               </div>
@@ -105,7 +126,7 @@
               <a href="#" class="services-item-image"><img src="{% static 'images/blog-2-370x270.jpg' %}" class="img-fluid" alt=""></a>
 
               <div class="down-content">
-                <h4><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h4>
+                <h4><a href="#" style="color:#806200">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h4>
 
                 <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>
               </div>
@@ -116,7 +137,7 @@
               <a href="#" class="services-item-image"><img src="static/images/blog-3-370x270.jpg" class="img-fluid" alt=""></a>
 
               <div class="down-content">
-                <h4><a href="#">Aperiam modi voluptatum fuga officiis cumque</a></h4>
+                <h4><a href="#" style="color:#806200">Aperiam modi voluptatum fuga officiis cumque</a></h4>
 
                 <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>
               </div>
@@ -143,7 +164,7 @@
                   <i class="fa fa-user"></i>
                 </div>
                 <div class="down-content">
-                  <h4>John Doe</h4>
+                  <h4 style="color:#806200">John Doe</h4>
                   <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
                 </div>
               </div>
@@ -153,17 +174,7 @@
                   <i class="fa fa-user"></i>
                 </div>
                 <div class="down-content">
-                  <h4>Jane Smith</h4>
-                  <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
-                </div>
-              </div>
-              
-              <div class="service-item">
-                <div class="icon">
-                  <i class="fa fa-user"></i>
-                </div>
-                <div class="down-content">
-                  <h4>Antony Davis</h4>
+                  <h4 style="color:#806200">Jane Smith</h4>
                   <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
                 </div>
               </div>
@@ -173,27 +184,7 @@
                   <i class="fa fa-user"></i>
                 </div>
                 <div class="down-content">
-                  <h4>John Doe</h4>
-                  <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
-                </div>
-              </div>
-
-              <div class="service-item">
-                <div class="icon">
-                  <i class="fa fa-user"></i>
-                </div>
-                <div class="down-content">
-                  <h4>Jane Smith</h4>
-                  <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
-                </div>
-              </div>
-
-              <div class="service-item">
-                <div class="icon">
-                  <i class="fa fa-user"></i>
-                </div>
-                <div class="down-content">
-                  <h4>Antony Davis</h4>
+                  <h4 style="color:#806200">Antony Davis</h4>
                   <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
                 </div>
               </div>

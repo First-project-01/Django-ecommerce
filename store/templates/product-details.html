@@ -1,5 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block toggler %}
+        <li class="nav-item active"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
+                    <span class="sr-only">(current)</span>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
+            <span class="sr-only">(current)</span>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'store:about-us' %}">About Us</a>
+              <a class="dropdown-item" href="{% url 'store:blogs' %}">Blog</a>
+              <a class="dropdown-item" href="{% url 'store:contact-us' %}">Contact Us</a>
+              <a class="dropdown-item" href="{% url 'store:terms' %}">Terms & Conditions</a>
+            </div>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'store:cart-page'%}">Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'logout-page' %}">Logout</a></li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'login-page' %}">Login</a></li>
+        {% endif %}
+{% endblock toggler %}
 {% block content %}
     <!-- Page Content -->
     <div class="page-heading about-heading header-text" style="background-image: {% static 'images/heading-6-1920x500.jpg' %}">
@@ -120,19 +141,7 @@
       </div>
     </div>
 
-    <!--<footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="inner-content">
-              <p>Copyright © 2020 Company Name - Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
--->
-    <!-- Modal -->
+
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
