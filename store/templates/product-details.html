@@ -40,25 +40,25 @@
         <div class="row">
           <div class="col-md-4 col-xs-12">
             <div>
-              <img src="{% static 'images/product1.jpg' %}" alt="" class="img-fluid wc-image">
+              <img src="{{ object.image.url }}" alt="" class="img-fluid wc-image">
             </div>
             <br>
             <div class="row">
               <div class="col-sm-4 col-xs-6">
                 <div>
-                  <img src="{% static 'images/product1.jpg' %}" alt="" class="img-fluid">
+                  <img src="{{ object.image.url }}" alt="" class="img-fluid">
                 </div>
                 <br>
               </div>
               <div class="col-sm-4 col-xs-6">
                 <div>
-                  <img src="{% static 'images/product1.jpg' %}" alt="" class="img-fluid">
+                  <img src="{{ object.image.url }}" alt="" class="img-fluid">
                 </div>
                 <br>
               </div>
               <div class="col-sm-4 col-xs-6">
                 <div>
-                  <img src="{% static 'images/product1.jpg' %}" alt="" class="img-fluid">
+                  <img src="{{ object.image.url }}" alt="" class="img-fluid">
                 </div>
                 <br>
               </div>
@@ -66,18 +66,23 @@
           </div>
             <div class="col-md-8 col-xs-12">
             <form action="#" method="post" class="form">
-              <h2>{{ items.title }}</h2>
+              <h2>{{ object.title }}</h2>
 
               <br>
 
               <p class="lead">
-                <!--<small><del> $999.00</del></small>--><strong class="text-primary">Rs. {{ items.price|floatformat:2 }}</strong>
+                {% if object.discount_price %}
+                <small><del>Rs.{{ object.price|floatformat:2 }}</del></small>
+                <strong class="text-primary">Rs.{{ object.discount_price|floatformat:2 }}</strong>
+                {% else %}
+                Rs.{{ object.price|floatformat:2}}
+                {% endif %}
               </p>
 
               <br>
 
               <p class="lead">
-                {{ items.description }}
+                {{ object.description }}
               </p>
               <br>
 
@@ -98,7 +103,7 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <input type="number" class="form-control" placeholder="1">
+                        <input type="text" class="form-control" placeholder="1">
                       </div>
                     </div>
 
@@ -106,8 +111,8 @@
                         <!--<a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
                           Add to cart<i class="fas fa-shopping-cart ml-1"></i>
                         </a>-->
-                        <a href="{{ items.get_add_to_cart_url }}" class="btn btn-success btn-block">Add to Cart</a>
-                        <a href="{{ items.get_remove_from_cart_url }}" class="btn btn-danger btn-block">Remove from cart</a> <!-- check -->
+                        <a href="{{ object.get_add_to_cart_url }}" class="btn btn-success btn-block">Add to Cart</a>
+                        <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-block">Remove from cart</a> <!-- check -->
                         </div>
                   </div>
                 </div>
@@ -129,82 +134,21 @@
           </div>
             <div class="col-md-4">
                 <div class="product-item">
-                  <a href="{{ item.get_absolute_url }}"><img src="{% static 'images/product1.jpg' %}" alt=""></a>
+                  <a href="{{ item.get_absolute_url }}"><img src="{{ object.image.url }}" alt=""></a>
                   <div class="down-content">
-                    <a href="{{ item.get_absolute_url }}"><h4>{{ items.title }}</h4></a>
-                    <h6><!--<small><del>$999.00 </del></small>-->Rs.{{ items.price|floatformat:2 }}</h6>
-                    <p>{{ items.description }}</p>
+                    <a href="{{ item.get_absolute_url }}"><h4>{{ object.title }}</h4></a>
+                        <h6>
+                            {% if object.discount_price %}
+                            <small><del>Rs.{{ object.price }}</del></small>Rs.{{ object.discount_price }}
+                            {% else %}
+                            Rs.{{ object.price}}
+                            {% endif %}
+                        </h6>
+                    <p>{{ object.description }}</p>
                   </div>
                 </div>
               </div>
         </div>
       </div>
     </div>
-
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Book Now</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="contact-form">
-              <form action="#" id="contact">
-                  <div class="row">
-                       <div class="col-md-6">
-                          <fieldset>
-                            <input type="text" class="form-control" placeholder="Pick-up location" required="">
-                          </fieldset>
-                       </div>
-
-                       <div class="col-md-6">
-                          <fieldset>
-                            <input type="text" class="form-control" placeholder="Return location" required="">
-                          </fieldset>
-                       </div>
-                  </div>
-
-                  <div class="row">
-                       <div class="col-md-6">
-                          <fieldset>
-                            <input type="text" class="form-control" placeholder="Pick-up date/time" required="">
-                          </fieldset>
-                       </div>
-
-                       <div class="col-md-6">
-                          <fieldset>
-                            <input type="text" class="form-control" placeholder="Return date/time" required="">
-                          </fieldset>
-                       </div>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Enter full name" required="">
-
-                  <div class="row">
-                       <div class="col-md-6">
-                          <fieldset>
-                            <input type="text" class="form-control" placeholder="Enter email address" required="">
-                          </fieldset>
-                       </div>
-
-                       <div class="col-md-6">
-                          <fieldset>
-                            <input type="text" class="form-control" placeholder="Enter phone" required="">
-                          </fieldset>
-                       </div>
-                  </div>
-              </form>
-           </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Order Now</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
 {% endblock content %}

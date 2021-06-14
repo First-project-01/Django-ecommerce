@@ -42,11 +42,17 @@
             {% for item in object_list %}
                 <div class="col-md-4">
                     <div class="product-item">
-                      <a href="{{ item.get_absolute_url }}"><img src="{% static 'images/product1.jpg' %}" alt=""></a>
+                      <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" alt=""></a>
                       <div class="down-content">
                         <a href="{{ item.get_absolute_url }}"><h4>{{ item.title }}</h4></a>
-                        <h6><!--<small><del>$999.00 </del></small>-->Rs.{{ item.price|floatformat:2 }}</h6>
-                        <p>{{ item.description }}</p>
+                          <h6>
+                            {% if item.discount_price %}
+                            <small><del>Rs.{{ item.price }}</del></small>Rs.{{ item.discount_price }}
+                            {% else %}
+                            Rs.{{ item.price}}
+                            {% endif %}
+                          </h6>
+                        <p>{{ item.description|truncatechars:40 }}</p>
                       </div>
                     </div>
                   </div>
@@ -54,11 +60,21 @@
 
           <div class="col-md-12">
             <ul class="pages">
-              <li><a href="#">1</a></li>
-              <li class="active"><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+              {% if is_paginated %}
+                {% if page_obj.has_previous %}
+                <a class="filled-button" href="?page={{ page_obj.previous_page_number }}"><<</a>
+              {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                      <a class="filled-button" href="?page={{ num }}">{{ num }}</a>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                      <a class="filled-button" href="?page={{ num }}">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <a class="filled-button" href="?page={{ page_obj.next_page_number }}">>></a>
+                {% endif %}
+              {% endif %}
             </ul>
           </div>
         </div>

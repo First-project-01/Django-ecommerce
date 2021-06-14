@@ -22,4 +22,3 @@ urlpatterns = [
     #path('oauth/', 'social_django.urls', name='social'),
 ]
 
-

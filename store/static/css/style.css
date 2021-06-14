@@ -292,7 +292,7 @@ header .navbar {
 /* Banner Style */
 .banner {
 	position: relative;
-	text-align: center;
+	text-align: justify;
 	padding-top: 80px;
 }
 
@@ -321,7 +321,7 @@ header .navbar {
 }
 
 .banner .banner-item {
-	max-height: 600px;
+	max-height: 400px;
 }
 
 .banner .text-content {
@@ -345,7 +345,7 @@ header .navbar {
 	text-shadow: #d3d3d3;     <!-- check -->
 	font-size: 62px;
 	text-transform: uppercase;
-	letter-spacing: 5px;
+	letter-spacing: 3px;
 }
 
 .owl-banner .owl-dots .owl-dot {
@@ -384,6 +384,7 @@ header .navbar {
 
 /* Latest Produtcs */
 
+
 .latest-products {
 	margin-top: 100px;
 }
@@ -398,7 +399,7 @@ header .navbar {
 }
 
 .product-item {
-	border: 1px solid #000;
+	border: 1px solid #806200;
 	margin-bottom: 30px;
 }
 
@@ -407,8 +408,10 @@ header .navbar {
 	position: relative;
 }
 
-.product-item img {
+.product-item img {   /*Check*/
+	object-fit: cover;
 	width: 100%;
+	height: 300px;
 	overflow: hidden;
 }
 
@@ -601,11 +604,12 @@ footer .inner-content p a {
 
 .products {
 	margin-top: 100px;
+	margin-bottom: 50px;
 }
 
 .products .filters {
 	text-align: center;
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #806200;
 	padding-bottom: 10px;
 	margin-bottom: 60px;
 }
@@ -922,23 +926,23 @@ footer .inner-content p a {
 }
 
 .contact-form button.filled-button {
-	background-color: #000;
-	color: #fff;
+	background-color: #f7f7f7;   /*Back and Place Order*/
+	color: #cd9921;
 	font-size: 14px;
 	text-transform: capitalize;
-	font-weight: 300;
+	font-weight: 500;
 	padding: 10px 20px;
 	border-radius: 5px;
 	display: inline-block;
 	transition: all 0.3s;
-	border: none;
+	border-color: #d3d3d3;
 	outline: none;
 	cursor: pointer;
 }
 
 .contact-form button.filled-button:hover {
 	background-color: #121212;
-	color: #fff;
+	color: #cd9921;
 }
 
 .accordion {
@@ -1106,3 +1110,44 @@ footer .inner-content p a {
 	}
 }
 
+
+    .website-header{
+      padding-top:10px;
+    }
+    .brand-logo{
+      padding-right: 10px;
+    }
+      @media only screen and (max-width:993px){
+        .website-header{
+           padding-left: 50px;
+           padding-top:0;
+        }
+        .brand-logo{
+          margin-top: 5px;
+          margin-left:20px;
+        }
+      }
+      @media only screen and (max-width:437px){
+        /* .navbar .navbar-brand h2{
+          font-size: 15px;
+        } */
+        .web-h1{
+          font-size: 1rem;
+        }
+        .navbar-toggler-icon{
+          padding-top: 2px;
+          padding-left: 10px;
+        }
+      }
+      @media only screen and (max-width:320px){
+        /* .navbar .navbar-brand h2{
+          font-size: 12px;
+        } */
+        .web-h1{
+          font-size: 0.8rem;
+        }
+        .navbar-toggler-icon{
+          padding-top: 2px;
+          padding-left: 10px;
+        }
+      }

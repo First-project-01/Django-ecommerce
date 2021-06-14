@@ -3,6 +3,7 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.shortcuts import reverse
+from django_resized import ResizedImageField
 
 
 AVAILABILITY = (
@@ -15,6 +16,9 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+class Banner(BaseModel):
+    image = ResizedImageField(upload_to='banner', null=True)
 
 
 class Profile(BaseModel):

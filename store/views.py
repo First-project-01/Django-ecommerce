@@ -21,7 +21,7 @@ class HomeView(ListView):
 
 class Product(ListView):
     model = Items
-    paginate_by = 10
+    paginate_by = 6
     template_name = 'products.html'
 
 
