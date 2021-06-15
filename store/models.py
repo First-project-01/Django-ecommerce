@@ -5,17 +5,18 @@ from django.db.models.signals import post_save
 from django.shortcuts import reverse
 from django_resized import ResizedImageField
 
-
 AVAILABILITY = (
     ('Y', 'Available'),
     ('N', 'Out of Stock'),
 )
+
 
 class BaseModel(models.Model):
     objects = models.Manager()
 
     class Meta:
         abstract = True
+
 
 class Banner(BaseModel):
     image = ResizedImageField(upload_to='banner', null=True)
@@ -27,12 +28,12 @@ class Profile(BaseModel):
     def __str__(self):
         return self.user.username
 
-    @receiver(post_save, sender=User) #add this
+    @receiver(post_save, sender=User)  # add this
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             Profile.objects.create(user=instance)
 
-    @receiver(post_save, sender=User) #add this
+    @receiver(post_save, sender=User)  # add this
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
 
@@ -44,7 +45,7 @@ class Items(BaseModel):
     label = models.CharField(choices=AVAILABILITY, default=AVAILABILITY[0][0], max_length=1)
     slug = models.SlugField(max_length=100)
     discount_price = models.FloatField(max_length=100, blank=True, null=True)
-    # image = models.ImageField()
+    image = models.ImageField()
 
     def __str__(self):
         return self.title
@@ -94,8 +95,8 @@ class Cart(BaseModel):
     ordered = models.BooleanField(default=False)
     shipping_address = models.ForeignKey(
         'Address', on_delete=models.SET_NULL, blank=True, null=True)
-    #payment = models.ForeignKey(
-        #'Payment', on_delete=models.SET_NULL, blank=True, null=True)
+    # payment = models.ForeignKey(
+    # 'Payment', on_delete=models.SET_NULL, blank=True, null=True)
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
@@ -133,9 +134,9 @@ class Address(BaseModel):
         verbose_name_plural = 'Addresses'
 
 
-
 class Refund(BaseModel):
     pass
+
 
 class Payment(BaseModel):
     pass
