@@ -45,7 +45,7 @@ class Items(BaseModel):
     label = models.CharField(choices=AVAILABILITY, default=AVAILABILITY[0][0], max_length=1)
     slug = models.SlugField(max_length=100)
     discount_price = models.FloatField(max_length=100, blank=True, null=True)
-    image = models.ImageField()
+    image = ResizedImageField(upload_to="", null=True, blank=True)
 
     def __str__(self):
         return self.title

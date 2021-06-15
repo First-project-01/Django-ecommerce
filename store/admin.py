@@ -32,6 +32,7 @@ class AddressAdmin(admin.ModelAdmin):
     list_filter = ['default', 'city', 'state']
     search_fields = ['user', 'address', 'pincode']
 
+
 admin.site.register(Items)
 admin.site.register(Cart, CartAdmin)
 admin.site.register(OrderItem)

@@ -12,7 +12,6 @@
 			<span class="sr-only">(current)</span>
 			<div class="dropdown-menu">
 			  <a class="dropdown-item" href="{% url 'store:about-us' %}">About Us</a>
-			  <a class="dropdown-item" href="{% url 'store:blogs' %}">Blog</a>
 			  <a class="dropdown-item" href="{% url 'store:contact-us' %}">Contact Us</a>
 			  <a class="dropdown-item" href="{% url 'store:terms' %}">Terms & Conditions</a>
 			</div>
@@ -60,65 +59,64 @@
           <div class="contact-form">
                <form method="POST">
                   {% csrf_token %}
-                   <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                             <div class="form-group">
-                                  <label class="control-label">Phone:</label>
-                                  <!--<input type="text" class="form-control">-->
-                                  {{ form.phone }}
-                             </div>
-                        </div>
-                   </div>
-                   <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                             <div class="form-group">
-                                  <label class="control-label">Address:</label>
-                                  {{ form.address }}
-                             </div>
-                        </div>
-                   </div>
-                   <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                             <div class="form-group">
-                                  <label class="control-label">City:</label>
-                                  {{ form.city }}
-                             </div>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                             <div class="form-group">
-                                  <label class="control-label">State:</label>
-                                  {{ form.state }}
-                             </div>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                             <div class="form-group">
-                                  <label class="control-label">Zip:</label>
-                                  {{ form.zip }}
-                             </div>
-                        </div>
-                         <div class="col-sm-6 col-xs-12">
-                             <div class="form-group">
-                                  <label class="control-label">Country:</label>
-                                  <select class="form-control">
-                                       <option value="">India</option>
-                                  </select>
-                             </div>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="control-input" name="set_default" id="set_default">
-                          <label class="control-label" for="set_default">Save as default shipping address</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="control-input">
-                          <label class="control-label">I agree with the <a href="{% url 'store:terms' %}" target="_blank">Terms &amp; Conditions</a></label>
-                        </div>
-                   </div>
-                   {% if default_address %}
-                            <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="control-input" name="use_default" id="use_default">
-                            <label class="control-label" for="use_default">Use default shipping address: {{ default_address.address|truncatechars:10 }}</label>
+                   <div class='hideable_shipping_form'>
+                       <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                                 <div class="form-group">
+                                      <!--<input type="text" class="form-control">-->
+                                      {{ form.phone | as_crispy_field}}
+                                 </div>
                             </div>
-                       {% endif %}
+                            <div class="col-sm-6 col-xs-12">
+                                 <div class="form-group">
+                                      {{ form.address | as_crispy_field}}
+                                 </div>
+                            </div>
+                       </div>
+                       <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    {{ form.city | as_crispy_field}}
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                     {{ form.state | as_crispy_field}}
+                                </div>
+                            </div>
+                           <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                     {{ form.zip | as_crispy_field}}
+                                </div>
+                           </div>
+                             <div class="col-sm-6 col-xs-12">
+                                 <div class="form-group">
+                                     <label class="control-label">Country:</label>
+                                      <select class="form-control">
+                                          <option value="">India</option>
+                                      </select>
+                                 </div>
+                             </div>
+                           <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="control-input" name="set_default" id="set_default">
+                              <label class="control-label" for="set_default">Save as default shipping address</label>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="row">
+                       <div class="column">
+                           <div class="custom-control custom-checkbox">
+                               <input type="checkbox" class="control-input">
+                               <label class="control-label">I agree with the <a href="{% url 'store:terms' %}" target="_blank">Terms &amp; Conditions</a></label>
+                           </div>
+                           {% if default_address %}
+                           <div class="custom-control custom-checkbox">
+                               <input type="checkbox" class="control-input" name="use_default" id="use_default">
+                               <label class="control-label" for="use_default">Use default shipping address: {{ default_address.address|truncatechars:50 }}</label>
+                           </div>
+                           {% endif %}
+                       </div>
+                   </div>
                    <div class="clearfix">
                         <button type="submit" class="filled-button pull-left">
                             <a href="{% url 'store:cart-page' %}" >Back</a>
@@ -128,7 +126,7 @@
                             <a href="{% url 'store:payment-page' %}" >Place Order</a>
                         </button>
                    </div>
-              </form>
+               </form>
           </div>
         </div>
       </div>
@@ -138,3 +136,19 @@
 <br>
 <br>
 {% endblock content %}
+
+{% block extra_scripts %}
+<script>
+var hideable_shipping_form = $('.hideable_shipping_form');
+
+var use_default = document.querySelector("input[name=use_default]");
+
+use_default.addEventListener('change', function() {
+  if (this.checked) {
+    hideable_shipping_form.hide();
+  } else {
+    hideable_shipping_form.show();
+  }
+})
+</script>
+{% endblock extra_scripts %}

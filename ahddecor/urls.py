@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.urls import path, re_path, include
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
 from store import views as views_store
 
 
@@ -18,5 +19,6 @@ urlpatterns = [
 urlpatterns += [
   re_path(r'^static/(?:.*)$', serve, {'document_root': settings.STATIC_ROOT,})
 ]
-
-
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)

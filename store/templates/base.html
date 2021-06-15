@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="{% static 'images/small logo.svg' %}">
+    <link rel="icon" href="{% static 'images/small_logo.svg' %}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <title>AHD</title>
@@ -38,7 +38,7 @@
         <div class="container-fluid">
             <!-- <a class="navbar-brand brand-logo" href="{% url 'store:home-page' %}">
               <img src="{% static 'images/small_logo.jpeg' %}" width="60" alt=""></a> -->
-            <a href="{% url 'store:home-page' %}"><img src="{% static 'images/small_logo.svg' %}" width="60" alt="" class="brand-logo"></a>
+            <a href="{% url 'store:home-page' %}"><img src="{% static 'images/small_logo (1).jpg' %}" width="60px" alt="" class="brand-logo"></a>
             <a class="navbar-brand" href="{% url 'store:home-page' %}">
                     <h2 class="website-header">
                         <span class="web-h1" style="font-size: 1.5rem">A</span><em class="web-h1">nju's</em>
@@ -81,36 +81,7 @@
     </div></footer>
     <br>
     <br>
-    <style>
-    .website-header{
-      padding-top:10px;
-    }
-    .brand-logo{
-      padding-right: 10px;
-    }
-      @media only screen and (max-width:993px){
-        .website-header{
-           padding-left: 50px;
-           padding-top:0;
-        }
-        .brand-logo{
-          margin-top: 5px;
-          margin-left:20px;
-        }
-      }
-      @media only screen and (max-width:437px){
-        /* .navbar .navbar-brand h2{
-          font-size: 15px;
-        } */
-        .web-h1{
-          font-size: 1.2rem;
-        }
-        .navbar-toggler-icon{
-          padding-top: 2px;
-          padding-left: 10px;
-        }
-      }
-</style>
+
 
 
       <script>
@@ -125,5 +96,8 @@
     <!-- Additional Scripts -->
     <script src="{% static 'js/custom.js' %}"></script>
     <script src="{% static 'js/owl.js' %}"></script>
+
+    {% block extra_scripts %}
+    {% endblock extra_scripts %}
   </body>
 </html>

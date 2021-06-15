@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block toggler %}
-        <li class="nav-item"><a class="nav-link" href="{% url 'store:home-page' %}">Home</a>
+   		<li class="nav-item"><a class="nav-link" href="{% url 'store:home-page' %}">Home</a>
                     <span class="sr-only">(current)</span>
-        </li>
+		</li>
    		<li class="nav-item"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
                     <span class="sr-only">(current)</span>
 		</li>
@@ -12,7 +12,6 @@
 			<span class="sr-only">(current)</span>
 			<div class="dropdown-menu">
 			  <a class="dropdown-item" href="{% url 'store:about-us' %}">About Us</a>
-			  <a class="dropdown-item" href="{% url 'store:blogs' %}">Blog</a>
 			  <a class="dropdown-item" href="{% url 'store:contact-us' %}">Contact Us</a>
 			  <a class="dropdown-item" href="{% url 'store:terms' %}">Terms & Conditions</a>
 			</div>
