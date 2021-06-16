@@ -58,27 +58,37 @@
         </div>
       </nav>
     </header>
+
+    <div>
+        <a href="https://api.whatsapp.com/send/?phone=917031651369&text&app_absent=0" target="_blank">
+            <img src="{% static 'images/whatsapp_icon.png' %}" class="wa-btn">
+        </a>
+    </div>
+
     {% block content %}
+
     {% endblock content %}
-    <footer><div class="call-to-action">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="inner-content">
-              <div class="row">
-                <div class="col-md-8">
-                  <h4 style="color:#cd9921">Anju's Home Decor </h4>
-                  <p>We value customers' feedback the most. Kindly reach out to us for any assistance.</p>
+    <footer>
+        <div class="call-to-action">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-content">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h4 style="color:#cd9921">Anju's Home Decor </h4>
+                                    <p>We value customers' feedback the most. Kindly reach out to us for any assistance.</p>
+                                </div>
+                                <div class="col-lg-4 col-md-6 text-right">
+                                    <a href="{% url 'store:contact-us' %}" class="filled-button">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-4 col-md-6 text-right">
-                  <a href="{% url 'store:contact-us' %}" class="filled-button">Contact Us</a>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div></footer>
+    </footer>
     <br>
     <br>
 
