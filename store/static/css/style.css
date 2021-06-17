@@ -1135,6 +1135,9 @@ footer .inner-content p a {
           padding-top: 2px;
           padding-left: 10px;
         }
+        wa-btn{
+            width: 50px;
+        }
       }
       @media only screen and (max-width:320px){
         /* .navbar .navbar-brand h2{
@@ -1147,4 +1150,15 @@ footer .inner-content p a {
           padding-top: 2px;
           padding-left: 10px;
         }
+         wa-btn{
+            width: 30px;
+        }
       }
+
+.wa-btn{
+	position: fixed;
+	bottom: 250px;
+	right: 0px;
+	z-index: 10;
+	width: 50px;
+}
