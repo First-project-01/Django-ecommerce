@@ -198,7 +198,7 @@ header {
     transition: all 0.3s ease-in-out 0s;
 }
 header .navbar {
-	padding: 17px 0px;
+	padding: 10px 0px;
 }
 .background-header .navbar {
 	padding: 17px 0px;
@@ -293,20 +293,18 @@ header .navbar {
 .banner {
 	position: relative;
 	text-align: justify;
-	padding-top: 80px;
+	padding: 0px, 0px;
 }
 
 .banner-item-01 {
-	padding: 300px 0px;
-	background-image: url(../images/bedsheet1.jpg);
-	background-size: cover;
+	padding:0px 0px;
+	overflow: hidden;
+	object-fit: cover;
 	background-repeat: no-repeat;
-	background-position: center center;
 }
 
 .banner-item-02 {
 	padding: 300px 0px;
-	background-image: url(../images/bedsheet2.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -314,7 +312,6 @@ header .navbar {
 
 .banner-item-03 {
 	padding: 300px 0px;
-	background-image: url(../images/bedsheet3.jpeg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;

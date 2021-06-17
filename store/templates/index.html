@@ -26,25 +26,20 @@
 {% block content %}
 <!-- Page Content -->
     <!-- Banner Starts Here -->
-    <div class="banner header-text">
-      <div class="owl-banner owl-carousel">
-        <div class="banner-item-01">
-          <div class="text-content">
-            <h2 style="color:#34282C;font-weight:bold">Where Quality Matches Expectations</h2>
+      <div class="banner header-text">
+          <div class="owl-banner owl-carousel">
+            {% for banner in banners %}
+              <div class="banner-item-01">
+                <img src="{{ banner.image.url }}" alt="">
+              </div>
+            {% endfor %}
+            <!--<div class="banner-item-02" style="background-image: url(media/banner/bedsheet2.jpeg);"></div>
+            <div class="banner-item-03" style="background-image: url(media/banner/bedsheet3.jpeg);"></div>
+              <div class="text-content">
+                <h2 style="color:white;font-weight:bold">Get what you want today!</h2>
+              </div>-->
           </div>
-        </div>
-        <div class="banner-item-02">
-          <div class="text-content">
-            <h2 style="color:#34282C;font-weight:bold">Beauty comes with variety</h2>
-          </div>
-        </div>
-        <div class="banner-item-03">
-          <div class="text-content">
-            <h2 style="color:white;font-weight:bold">Get what you want today!</h2>
-          </div>
-        </div>
       </div>
-    </div>
     <!-- Banner Ends Here -->
 
     <div class="latest-products">

@@ -34,6 +34,7 @@ class AddressAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Items)
+admin.site.register(Banner)
 admin.site.register(Cart, CartAdmin)
 admin.site.register(OrderItem)
 admin.site.register(Address, AddressAdmin)

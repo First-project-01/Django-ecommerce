@@ -15,8 +15,14 @@ def payment(request):
 
 
 class HomeView(ListView):
-    model = Items
+    context_object_name = 'items'
     template_name = "index.html"
+    queryset = Items.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['banners'] = Banner.objects.all()
+        return context
 
 
 class Product(ListView):
@@ -118,6 +124,7 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, 'register.html', {'form': form})
+
 
 class CartFunc(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):

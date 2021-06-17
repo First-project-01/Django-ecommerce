@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.shortcuts import reverse
 from django_resized import ResizedImageField
 
+
 AVAILABILITY = (
     ('Y', 'Available'),
     ('N', 'Out of Stock'),
@@ -19,7 +20,7 @@ class BaseModel(models.Model):
 
 
 class Banner(BaseModel):
-    image = ResizedImageField(upload_to='banner', null=True)
+    image = models.ImageField(upload_to='banner', null=True, blank=True)
 
 
 class Profile(BaseModel):
@@ -41,7 +42,7 @@ class Profile(BaseModel):
 class Items(BaseModel):
     title = models.CharField(max_length=100, null=True, blank=True)
     price = models.FloatField()
-    description = models.TextField(max_length=200)
+    description = models.TextField(max_length=500)
     label = models.CharField(choices=AVAILABILITY, default=AVAILABILITY[0][0], max_length=1)
     slug = models.SlugField(max_length=100)
     discount_price = models.FloatField(max_length=100, blank=True, null=True)
