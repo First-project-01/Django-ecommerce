@@ -296,15 +296,15 @@ header .navbar {
 	padding-top: 80px;
 }
 
-.banner-item {
+.banner-item-01 {
 	padding: 300px 0px;
-	/*background-image: url(../images/bedsheet1.jpg);*/
-	object-fit: cover;
+	background-image: url(../images/bedsheet1.jpg);
+	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
 }
 
-/*.banner-item-02 {
+.banner-item-02 {
 	padding: 300px 0px;
 	background-image: url(../images/bedsheet2.jpg);
 	background-size: cover;
@@ -318,7 +318,7 @@ header .navbar {
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
-}*/
+}
 
 .banner .banner-item {
 	max-height: 400px;

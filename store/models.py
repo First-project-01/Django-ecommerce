@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.shortcuts import reverse
 from django_resized import ResizedImageField
 
+
 AVAILABILITY = (
     ('Y', 'Available'),
     ('N', 'Out of Stock'),
