@@ -19,7 +19,7 @@ class BaseModel(models.Model):
 
 
 class Banner(BaseModel):
-    image = ResizedImageField(upload_to='banner', null=True)
+    image = models.ImageField(upload_to='banner', null=True, blank=True)
 
 
 class Profile(BaseModel):

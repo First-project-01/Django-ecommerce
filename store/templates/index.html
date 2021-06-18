@@ -28,12 +28,12 @@
     <!-- Banner Starts Here -->
     <div class="banner header-text">
       <div class="owl-banner owl-carousel">
-        <div class="banner-item-01">
-          <div class="text-content">
-            <h2 style="color:#34282C;font-weight:bold">Where Quality Matches Expectations</h2>
-          </div>
+        {% for banner in banners %}
+        <div class="banner-item">
+          <img src="{{ banner.image.url }}" alt="banners">
         </div>
-        <div class="banner-item-02">
+        {% endfor %}
+        <!--<div class="banner-item-02">
           <div class="text-content">
             <h2 style="color:#34282C;font-weight:bold">Beauty comes with variety</h2>
           </div>
@@ -42,7 +42,7 @@
           <div class="text-content">
             <h2 style="color:white;font-weight:bold">Get what you want today!</h2>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
     <!-- Banner Ends Here -->
@@ -69,7 +69,7 @@
                   Rs.{{ item.price }}
                   {% endif %}
                 </h6>
-                <p>{{ item.description|truncatechars:60 }}</p>
+                <p>{{ item.description|truncatechars:30 }}</p>
               </div>
             </div>
           </div>
@@ -107,14 +107,13 @@
       </div>
     </div>
 
-    <div class="services" style="background-image: url(static/images/other-image-fullscren-1-1920x900.jpg);" >
+    <div class="services" style="background-image: url(static/images/bedsheet2.jpg);" >
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
               <h2>Happy Clients</h2>
-
-              <a href="testimonials.html">Read More <i class="fa fa-angle-right"></i></a>
+              <a href="testimonials.html" style="color: black;">Read More <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
           <div class="col-md-12">
