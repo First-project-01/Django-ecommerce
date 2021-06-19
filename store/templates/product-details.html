@@ -45,25 +45,6 @@
               <img src="{{ object.image.url }}" alt="" class="img-fluid wc-image">
             </div>
             <br>
-            <div class="row">
-              <div class="col-sm-4 col-xs-6">
-                <div>
-                  <img src="{{ object.image.url }}" alt="" class="img-fluid">
-                </div>
-                <br>
-              </div>
-              <div class="col-sm-4 col-xs-6">
-                <div>
-                  <img src="{{ object.image.url }}" alt="" class="img-fluid">
-                </div>
-                <br>
-              </div>
-              <div class="col-sm-4 col-xs-6">
-                <div>
-                  <img src="{{ object.image.url }}" alt="" class="img-fluid">
-                </div>
-                <br>
-              </div>
             </div>
           </div>
             <div class="col-md-8 col-xs-12">
@@ -89,26 +70,7 @@
               <br>
 
              <div class="row">
-                <div class="col-sm-4">
-                  <label class="control-label">Select size</label>
-                  <div class="form-group">
-                    <select class="form-control">
-                      <option value="0">Bunk</option>
-                      <option value="1">Queen</option>
-                      <option value="2">King</option>
-                    </select>
-                  </div>
-                </div>
                 <div class="col-sm-8">
-                  <label class="control-label">Quantity</label>
-
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="1">
-                      </div>
-                    </div>
-
                     <div class="col-sm-6">
                         <a href="{{ object.get_add_to_cart_url }}" class="btn btn-success btn-block">Add to Cart</a>
                         <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-block">Remove from cart</a> <!-- check -->
@@ -118,35 +80,6 @@
               </div>
             </form>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="latest-products">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="section-heading">
-              <h2>Similar Products</h2>
-              <a href="{% url 'store:products-list' %}">View More <i class="fa fa-angle-right"></i></a>
-            </div>
-          </div>
-            <div class="col-md-4">
-                <div class="product-item">
-                  <a href="{{ item.get_absolute_url }}"><img src="{{ object.image.url }}" alt=""></a>
-                  <div class="down-content">
-                    <a href="{{ item.get_absolute_url }}"><h4>{{ object.title }}</h4></a>
-                        <h6>
-                            {% if object.discount_price %}
-                            <small><del>Rs.{{ object.price }}</del></small>Rs.{{ object.discount_price }}
-                            {% else %}
-                            Rs.{{ object.price}}
-                            {% endif %}
-                        </h6>
-                    <p>{{ object.description }}</p>
-                  </div>
-                </div>
-              </div>
         </div>
       </div>
     </div>

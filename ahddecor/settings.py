@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     'store.apps.StoreConfig',
     'crispy_forms',
     'django_resized',
+    'django_filters',
+    'bootstrapform',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

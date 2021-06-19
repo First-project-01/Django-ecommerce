@@ -297,9 +297,15 @@ header .navbar {
 }
 
 .banner-item-01 {
+<<<<<<< Updated upstream
 	padding: 300px 0px;
 	background-image: url(../images/bedsheet1.jpg);
 	background-size: cover;
+=======
+	padding:300px 0px;
+	background-size: cover;
+	background-image: url(var(--item));
+>>>>>>> Stashed changes
 	background-repeat: no-repeat;
 	background-position: center center;
 }

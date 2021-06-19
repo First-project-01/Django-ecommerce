@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.shortcuts import reverse
 from django_resized import ResizedImageField
+from PIL import Image
 
 
 AVAILABILITY = (
@@ -20,7 +21,7 @@ class BaseModel(models.Model):
 
 
 class Banner(BaseModel):
-    image = models.ImageField(upload_to='banner', null=True, blank=True)
+    image = ResizedImageField(upload_to="banner", null=True, blank=True)
 
 
 class Profile(BaseModel):
@@ -41,9 +42,10 @@ class Profile(BaseModel):
 
 class Items(BaseModel):
     title = models.CharField(max_length=100, null=True, blank=True)
-    price = models.FloatField()
+    price = models.FloatField(null=True, blank=True)
+    size = models.CharField(max_length=100)
     description = models.TextField(max_length=500)
-    label = models.CharField(choices=AVAILABILITY, default=AVAILABILITY[0][0], max_length=1)
+    available = models.CharField(choices=AVAILABILITY, default=AVAILABILITY[0][0], max_length=1)
     slug = models.SlugField(max_length=100)
     discount_price = models.FloatField(max_length=100, blank=True, null=True)
     image = ResizedImageField(upload_to="", null=True, blank=True)
@@ -96,8 +98,7 @@ class Cart(BaseModel):
     ordered = models.BooleanField(default=False)
     shipping_address = models.ForeignKey(
         'Address', on_delete=models.SET_NULL, blank=True, null=True)
-    # payment = models.ForeignKey(
-    # 'Payment', on_delete=models.SET_NULL, blank=True, null=True)
+    # payment = models.ForeignKey('Payment', on_delete=models.SET_NULL, blank=True, null=True)
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)

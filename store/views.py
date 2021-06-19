@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from .models import *
+from .filters import ProductFilter
 from django.http import HttpResponse
 
 
@@ -29,11 +30,16 @@ class Product(ListView):
     model = Items
     paginate_by = 6
     template_name = 'products.html'
+    def get_context_data(self, **kwargs):
+        context = super(Product, self).get_context_data(**kwargs)
+        context['filter'] = ProductFilter(self.request.GET, queryset=self.get_queryset())
+        return context
 
 
 class ProductDetails(DetailView):
     model = Items
-    template_name = 'product-details.html'
+    template_name = 'product-details.html' 
+    
 
 
 class CheckoutView(View):
@@ -240,13 +246,3 @@ def blogs(request):
 def terms(request):
     return render(request, 'terms.html')
 
-
-class HomeView(ListView):
-    context_object_name = 'items'
-    template_name = "index.html"
-    queryset = Items.objects.all()
-
-    def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
-        context['banners'] = Banner.objects.all()
-        return context
