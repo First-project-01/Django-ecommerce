@@ -186,7 +186,7 @@ def remove_from_cart(request, slug):
             order_item.delete()
             messages.info(request, "This item was removed from your cart.")
             return redirect(reverse('store:cart-page'))
-        else:                                                           #change
+        else:  # change
             messages.info(request, "This item was not in your cart")
             return redirect(reverse('store:cart-page'))
     else:
@@ -224,14 +224,29 @@ def remove_single_item_from_cart(request, slug):
         messages.info(request, "You do not have an active order")
         return redirect(reverse('store:cart-page'))
 
+
 def about_us(request):
     return render(request, 'about-us.html')
+
 
 def contact_us(request):
     return render(request, 'contact.html')
 
+
 def blogs(request):
     return render(request, 'blog.html')
 
+
 def terms(request):
     return render(request, 'terms.html')
+
+
+class HomeView(ListView):
+    context_object_name = 'items'
+    template_name = "index.html"
+    queryset = Items.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['banners'] = Banner.objects.all()
+        return context
