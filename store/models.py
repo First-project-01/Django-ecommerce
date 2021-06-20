@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.shortcuts import reverse
 from django_resized import ResizedImageField
-from PIL import Image
 
 
 AVAILABILITY = (
@@ -21,7 +20,7 @@ class BaseModel(models.Model):
 
 
 class Banner(BaseModel):
-    image = ResizedImageField(upload_to="banner", null=True, blank=True)
+    image = models.ImageField(upload_to='banner', null=True, blank=True)
 
 
 class Profile(BaseModel):
