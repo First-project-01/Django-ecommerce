@@ -44,7 +44,7 @@
               <a href="{% url 'store:products-list' %}">View More <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
-          {% for item in object_list|slice:":3" %} <!--Limit to 6 items-->
+          {% for item in object_list|slice:":6" %} <!--Limit to 6 items-->
           <div class="col-md-4">
             <div class="product-item">
                 <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" alt=""></a>

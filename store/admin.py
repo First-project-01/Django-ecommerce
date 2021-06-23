@@ -33,7 +33,11 @@ class AddressAdmin(admin.ModelAdmin):
     search_fields = ['user', 'address', 'pincode']
 
 
-admin.site.register(Items)
+class ItemsAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("title",)}
+
+
+admin.site.register(Items, ItemsAdmin)
 admin.site.register(Banner)
 admin.site.register(Cart, CartAdmin)
 admin.site.register(OrderItem)

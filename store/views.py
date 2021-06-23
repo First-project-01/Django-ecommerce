@@ -18,7 +18,7 @@ def payment(request):
 class HomeView(ListView):
     context_object_name = 'items'
     template_name = "index.html"
-    queryset = Items.objects.all()
+    queryset = Items.objects.filter(featured=True)
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
@@ -30,9 +30,18 @@ class Product(ListView):
     model = Items
     paginate_by = 6
     template_name = 'products.html'
+    ordering = ["-id"]
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        filter = ProductFilter(self.request.GET, queryset)
+        return filter.qs
+
     def get_context_data(self, **kwargs):
-        context = super(Product, self).get_context_data(**kwargs)
-        context['filter'] = ProductFilter(self.request.GET, queryset=self.get_queryset())
+        context = super().get_context_data(**kwargs)
+        queryset = self.get_queryset()
+        filter = ProductFilter(self.request.GET, queryset)
+        context["filter"] = filter
         return context
 
 

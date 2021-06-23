@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -9,6 +10,18 @@ from django_resized import ResizedImageField
 AVAILABILITY = (
     ('Y', 'Available'),
     ('N', 'Out of Stock'),
+)
+
+SIZES = (
+    ('King', 'King - 108" x 120"'),
+    ('Queen', 'Queen - 90" x 108"'),
+    ('Single', 'Single'),
+    ('Double', 'Double')
+)
+
+CATEGORY = (
+    ('B', 'Bedsheet'),
+    ('D', 'Dohar')
 )
 
 
@@ -42,12 +55,16 @@ class Profile(BaseModel):
 class Items(BaseModel):
     title = models.CharField(max_length=100, null=True, blank=True)
     price = models.FloatField(null=True, blank=True)
-    size = models.CharField(max_length=100)
-    description = models.TextField(max_length=500)
-    available = models.CharField(choices=AVAILABILITY, default=AVAILABILITY[0][0], max_length=1)
-    slug = models.SlugField(max_length=100)
     discount_price = models.FloatField(max_length=100, blank=True, null=True)
+    description = models.TextField(max_length=500)
+    size = models.CharField(choices=SIZES, default=SIZES[0][0], max_length=10)
+    category = models.CharField(choices=CATEGORY, default=CATEGORY[0][0], max_length=1)
+    featured = models.BooleanField(default=False)
+    availability = models.CharField(choices=AVAILABILITY, default=AVAILABILITY[0][0], max_length=1)
     image = ResizedImageField(upload_to="", null=True, blank=True)
+    slug = models.SlugField(max_length=100)
+    date_added = models.DateField(default=timezone.now)
+
 
     def __str__(self):
         return self.title
