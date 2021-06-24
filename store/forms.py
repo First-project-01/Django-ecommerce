@@ -18,11 +18,6 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
 
-class PDetails(forms.Form):
-    size = forms.ChoiceField(choices=SIZES)
-    quantity = forms.IntegerField(max_value=11)
-
-
 class CheckoutForm(forms.Form):
     phone = forms.CharField(max_length=10, required=True)
     address = forms.CharField(max_length=500, required=True)

@@ -46,6 +46,17 @@
       <div class="container">
           <form method="get"style="width:20%">
             {{filter.form|crispy}}
+              <label>Select sorting criteria</label>
+              <div class="control">
+                  <div class="select">
+                      <select name="sorting">
+                          <option value="-date_added"{% if sorting == '-date_added' %}selected{% endif %}>Latest collection</option>
+                          <option value="price"{% if sorting == 'price' %} selected {% endif %}>Lowest to Highest</option>
+                          <option value="-price"{% if sorting == '-price' %} selected {% endif %}>Highest to Lowest</option>
+                      </select>
+                  </div>
+              </div>
+              <br>
             <button type="submit" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-search"></span> Search</button>
         </form> 
       </div>
@@ -97,3 +108,4 @@
       </div>
     </div>
 {% endblock content %}
+

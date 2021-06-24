@@ -43,6 +43,8 @@ class Product(ListView):
         filter = ProductFilter(self.request.GET, queryset)
         context["filter"] = filter
         return context
+    
+
 
 
 class ProductDetails(DetailView):
