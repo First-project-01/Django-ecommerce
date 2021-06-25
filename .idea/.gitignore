@@ -2,6 +2,6 @@
 /shelf/
 /workspace.xml
 **/migrations
-/pyvenv.cfg
+/venv/pyvenv.cfg
 /db.sqlite3
 **/__pycache__
