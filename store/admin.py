@@ -34,7 +34,7 @@ class AddressAdmin(admin.ModelAdmin):
 
 
 class ItemsAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("title",)}
+    prepopulated_fields = {"slug": ("title","size")}
 
 
 admin.site.register(Items, ItemsAdmin)

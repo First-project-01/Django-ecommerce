@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block toggler %}
+   		<li class="nav-item"><a class="nav-link" href="{% url 'store:home-page' %}">Home</a>
+                    <span class="sr-only">(current)</span>
+		</li>
+        <li class="nav-item active"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
+                    <span class="sr-only">(current)</span>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
+            <span class="sr-only">(current)</span>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'store:about-us' %}">About Us</a>
+              <a class="dropdown-item" href="{% url 'store:contact-us' %}">Contact Us</a>
+              <a class="dropdown-item" href="{% url 'store:terms' %}">Terms & Conditions</a>
+            </div>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'store:cart-page'%}">Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'logout-page' %}">Logout</a></li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'login-page' %}">Login</a></li>
+        {% endif %}
+{% endblock toggler %}
+
+{% block content %}
+    
+    <form method="get" action="{% url 'store:search' %}">
+
+            <div class="column is-4">
+                <h2 class="is-size-5">Sorting</h2>
+
+                <div class="field">
+                    <label>Select sorting criteria</label>
+
+                    <div class="control">
+                        <div class="select">
+                            <select name="sorting">
+                                <option value="-date_added"{% if sorting == '-date_added' %} selected{% endif %}>Newest first</option>
+                                <option value="price"{% if sorting == 'price' %} selected{% endif %}>Price low-high</option>
+                                <option value="-price"{% if sorting == '-price' %} selected{% endif %}>Price high-low</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-12">
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-success">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    <hr>
+
+    {% with products as list_products %}
+        {% include 'filtered_list.html' %}
+    {% endwith %}
+
+{% endblock %}

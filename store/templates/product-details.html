@@ -41,16 +41,15 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4 col-xs-12">
-            <div>
               <img src="{{ object.image.url }}" alt="" class="img-fluid wc-image">
-            </div>
-            <br>
-            </div>
           </div>
-            <div class="col-md-8 col-xs-12">
-            <form action="#" method="post" class="form">
-              <h2 style="colour: #806200">{{ object.title }} ({{ object.size }})</h2>
-              <br>
+       
+          
+        <div class="col-md-8 col-xs-12">
+          <br>
+          <form action="#" method="post" class="form">
+            <h2 style="colour: #806200">{{ object.title }} ({{ object.size }})</h2>
+            <br>
 
               <p class="lead">
                 {% if object.discount_price %}
@@ -66,20 +65,23 @@
               <p class="lead">
                 {{ object.description }}
               </p>
+
               <br>
 
-             <div class="row">
+              <div class="row">
                 <div class="col-sm-8">
-                    <div class="col-sm-6">
-                        <a href="{{ object.get_add_to_cart_url }}" class="btn btn-success btn-block">Add to Cart</a>
-                        <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-block">Remove from cart</a> <!-- check -->
-                        </div>
+                  <div class="col-sm-6">
+                   <a href="{{ object.get_add_to_cart_url }}" class="btn btn-success btn-block">Add to Cart</a>
+                    <!--<a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-block">Remove from cart</a> <!-- check -->
                   </div>
                 </div>
               </div>
-            </form>
-          </div>
+
+            </div>
+          </form>
+
         </div>
       </div>
     </div>
+  </div>
 {% endblock content %}
