@@ -1,58 +1,22 @@
-{% load static %}
-{% load crispy_forms_tags %}
-    <!-- Page Content -->
-
-    <!--Filter-->
-    <div class="row">
-      <div class="container">
-          <form method="get" style="width:20%">
-            {{filter.form|crispy}}
-            <button type="submit" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-search"></span> Search</button>
-        </form> 
-      </div>
-    </div>
-    
-    <div class="products">
-      <div class="container">
-        <div class="row">
-            {% for p in list_products %}
-                <div class="col-md-4">
-                    <div class="product-item">
-                      <a href="{{ p.get_absolute_url }}"><img src="{{ p.image.url }}" alt=""></a>
-                      <div class="down-content">
-                        <a href="{{ p.get_absolute_url }}"><h4>{{ p.title }} ({{ p.size }})</h4></a>
-                          <h6>
-                            {% if p.discount_price %}
-                            <small><del>Rs.{{ p.price }}</del></small>Rs.{{ p.discount_price }}
-                            {% else %}
-                            Rs.{{ p.price}}
-                            {% endif %}
-                          </h6>
-                        <p>{{ p.description|truncatechars:40 }}</p>
-                      </div>
-                    </div>
-                  </div>
-            {% endfor %}
-
-          <div class="col-md-12">
-            <ul class="pages">
-              {% if is_paginated %}
-                {% if page_obj.has_previous %}
-                <a class="filled-button" href="?page={{ page_obj.previous_page_number }}"><<</a>
-              {% endif %}
-                {% for num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == num %}
-                      <a class="filled-button" href="?page={{ num }}">{{ num }}</a>
-                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                      <a class="filled-button" href="?page={{ num }}">{{ num }}</a>
+<div class="container">
+  <div class="row">
+    {% for p in list_products %}
+        <div class="col-md-4">
+          <div class="product-item">
+            <a href="{{ p.get_absolute_url }}"><img src="{{ p.image.url }}" alt=""></a>
+              <div class="down-content">
+                <a href="{{ p.get_absolute_url }}"><h4>{{ p.title }} ({{ p.size }})</h4></a>
+                  <h6>
+                    {% if p.discount_price %}
+                    <small><del>Rs.{{ p.price }}</del></small>Rs.{{ p.discount_price }}
+                    {% else %}
+                    Rs.{{ p.price}}
                     {% endif %}
-                {% endfor %}
-                {% if page_obj.has_next %}
-                <a class="filled-button" href="?page={{ page_obj.next_page_number }}">>></a>
-                {% endif %}
-              {% endif %}
-            </ul>
+                  </h6>
+                  <p>{{ p.description|truncatechars:40 }}</p>
+              </div>
           </div>
         </div>
-      </div>
-    </div>
+    {% endfor %}
+  </div>
+</div>

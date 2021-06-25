@@ -103,6 +103,9 @@ class OrderItem(BaseModel):
         if self.product.discount_price:
             return self.get_total_discount_item_price()
         return self.get_total_item_price()
+    
+    class Meta:
+        verbose_name_plural = 'Cart Items'
 
 
 class Cart(BaseModel):
@@ -134,6 +137,9 @@ class Cart(BaseModel):
         for order_item in self.items.all():
             total += order_item.get_final_price()
         return total
+    
+    class Meta:
+        verbose_name_plural = 'Order'
 
 
 class Address(BaseModel):

@@ -44,13 +44,46 @@
     <!--Filter-->
     <div class="row">
       <div class="container">
-          <form method="get" style="width:20%">
-            {{filter.form|crispy}}
-            <button type="submit" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-search"></span> Search</button>
+        <form method="get" style="width:20%">
+          {{filter.form|crispy}}
+          <button type="submit" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-search"></span> Search</button>
         </form> 
       </div>
     </div>
-    
+
+  <div class="row">
+    <div class="container">
+        <form method="get" action="{% url 'store:search' %}">
+                <div class="column is-4">
+                    <h2 class="is-size-5">Sorting</h2>
+
+                    <div class="field">
+                        <label>Select sorting criteria</label>
+
+                        <div class="control">
+                            <div class="select">
+                                <select name="sorting">
+                                    <option value="-date_added"{% if sorting == '-date_added' %} selected{% endif %}>Newest first</option>
+                                    <option value="price"{% if sorting == 'price' %} selected{% endif %}>Price low-high</option>
+                                    <option value="-price"{% if sorting == '-price' %} selected{% endif %}>Price high-low</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column is-12">
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-success">Search</button>
+                        </div>
+                    </div>
+                </div>
+        </form>
+      </div>
+    </div>
+
+   
     <div class="products">
       <div class="container">
         <div class="row">
@@ -72,6 +105,7 @@
                     </div>
                   </div>
             {% endfor %}
+
 
           <div class="col-md-12">
             <ul class="pages">
@@ -96,3 +130,4 @@
       </div>
     </div>
 {% endblock content %}
+

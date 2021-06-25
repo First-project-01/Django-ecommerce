@@ -25,10 +25,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_resized',
     'django_filters',
-<<<<<<< Updated upstream
-=======
-    #'bootstrapform',
->>>>>>> Stashed changes
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
