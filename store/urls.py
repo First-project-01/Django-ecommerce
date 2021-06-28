@@ -19,7 +19,6 @@ urlpatterns = [
     path('contact-us', views.contact_us, name='contact-us'),
     path('blogs', views.blogs, name='blogs'),
     path('terms', views.terms, name='terms'),
-    path('search', views.search, name='search'),
     #path('oauth/', 'social_django.urls', name='social'),
 ]
 

@@ -14,7 +14,7 @@ body {
   }
   a {
 	  text-decoration: none!important;
-	color: #cd9921;
+	color: #000;
   }
   ul {
 	  padding: 0;
@@ -91,7 +91,7 @@ body {
   }
   
   .page-heading .text-content h4 {
-	  color: #f33f3f;
+	  color: #cd9921;
 	  font-size: 22px;
 	  text-transform: uppercase;
 	  font-weight: 700;
@@ -130,7 +130,7 @@ body {
   }
   
   #preloader .jumper > div {
-	background-color: #fff;
+	background-color: rgba(248, 243, 213, 0.767);
 	width: 10px;
 	height: 10px;
 	border-radius: 100%;
@@ -303,22 +303,6 @@ body {
 	  background-position: center center;
   }
   
-  /*.banner-item-02 {
-	  padding: 300px 0px;
-	  background-image: url(../images/bedsheet2.jpg);
-	  background-size: cover;
-	  background-repeat: no-repeat;
-	  background-position: center center;
-  }
-  
-  .banner-item-03 {
-	  padding: 300px 0px;
-	  background-image: url(../images/bedsheet3.jpeg);
-	  background-size: cover;
-	  background-repeat: no-repeat;
-	  background-position: center center;
-  }*/
-  
   .banner .banner-item {
 	  max-height: 600px;
   }
@@ -341,7 +325,7 @@ body {
   
   .banner .text-content h2 {
 	  color: #fff;
-	  text-shadow: #d3d3d3;     <!-- check -->
+	  text-shadow: #d3d3d3;     /*check*/
 	  font-size: 62px;
 	  text-transform: uppercase;
 	  letter-spacing: 3px;
@@ -388,7 +372,7 @@ body {
 	  margin-top: 100px;
   }
   
-  .section-heading a {     <!--View More -->
+  .section-heading a {     
 	  float: right;
 	  margin-top: -35px;
 	  text-transform: uppercase;
@@ -407,7 +391,7 @@ body {
 	  position: relative;
   }
   
-  .product-item img {   /Check/
+  .product-item img {   
 	  object-fit: cover;
 	  width: 100%;
 	  height: 300px;
@@ -555,7 +539,7 @@ body {
   
   .call-to-action .inner-content h4 {
 	  font-size: 17px;
-	  color: #1a6692;
+	  color: #000;
 	  margin-bottom: 15px;
   }
   
@@ -647,7 +631,7 @@ body {
 	  left:0;
 	  bottom:0;
 	  right:0;
-	  background-color:rgba(0,0,0,.7);
+	  background-image:/*rgba(85, 53, 15, 0.788)*/url(../images/background-index.jpg);
   }
   .page-heading .container {
 	  position:relative;
@@ -711,7 +695,7 @@ body {
   
   .team-member .thumb-container .hover-effect {
 	  position: absolute;
-	  background-color: rgba(243,63,63,0.9);
+	  background-color: rgba(99, 72, 15, 0.9);
 	  top: 0;
 	  left: 0;
 	  width: 100%;
@@ -873,7 +857,7 @@ body {
   
   .find-us h4 {
 	  font-size: 17px;
-	  color: #1a6692;
+	  color: #787a04;
 	  margin-bottom: 20px;
   }
   
@@ -925,7 +909,7 @@ body {
   }
   
   .contact-form button.filled-button {
-	  background-color: #f7f7f7;   /Back and Place Order/
+	  background-color: #f7f7f7;   
 	  color: #cd9921;
 	  font-size: 14px;
 	  text-transform: capitalize;
@@ -951,7 +935,7 @@ body {
   .accordion a {
 	  cursor: pointer;
 	  font-size: 17px;
-	  color: #1a6692!important;
+	  color: #000!important;
 	  margin-bottom: 20px;
 	  transition: all .3s;
   }

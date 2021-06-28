@@ -12,6 +12,7 @@ AVAILABILITY = (
     ('N', 'Out of Stock'),
 )
 
+
 SIZES = (
     ('King', 'King - 108" x 120"'),
     ('Queen', 'Queen - 90" x 108"'),
@@ -64,6 +65,14 @@ class Items(BaseModel):
     image = ResizedImageField(upload_to="", null=True, blank=True)
     slug = models.SlugField(max_length=100)
     date_added = models.DateField(default=timezone.now)
+
+    def save(self, *args, **kwargs):
+        try:
+            this = Items.objects.get(id=self.id)
+            if this.image != self.image or this.image == 'clear':
+                this.image.delete()
+        except: pass
+        super(Items, self).save(*args, **kwargs)
 
 
     def __str__(self):
