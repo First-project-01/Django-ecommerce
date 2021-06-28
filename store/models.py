@@ -12,6 +12,7 @@ AVAILABILITY = (
     ('N', 'Out of Stock'),
 )
 
+
 SIZES = (
     ('King', 'King - 108" x 120"'),
     ('Queen', 'Queen - 90" x 108"'),

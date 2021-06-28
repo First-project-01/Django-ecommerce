@@ -1,15 +1,19 @@
 import django_filters
+from django_filters.filters import OrderingFilter, RangeFilter
 from .models import Items
 
-
 class ProductFilter(django_filters.FilterSet):
+    sort = OrderingFilter(
+        choices=(
+            ('date_added', 'Latest products'),
+            ('price', 'Lowest to Highest'),
+            ('-price', 'Highest to Lowest'),
+            ),
+        fields={
+            'price': 'price',
+        },
+    )
+    price = RangeFilter()
     class Meta:
         model = Items
         fields = ['size', 'category']
-        '''filter_overrides = {models.BooleanField: {
-                'filter_class': django_filters.BooleanFilter(),
-                'extra': lambda f: {
-                    widgets: forms.RadioInput,
-                },
-            }
-        }'''

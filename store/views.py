@@ -11,18 +11,6 @@ from .filters import ProductFilter
 from django.http import HttpResponse
 
 
-def search(request):
-    sorting = request.GET.get('sorting', '-date_added')
-    products = Items.objects.all()
-
-    context = {
-        'products': products.order_by(sorting),
-        'sorting': sorting
-    }
-
-    return render(request, 'search.html', context)
-
-
 def payment(request):
     return HttpResponse('Payment Page')
 
