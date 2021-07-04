@@ -15,6 +15,7 @@ def payment(request):
     return render(request, 'payment.html')
 
 
+
 class ProfileView(DetailView):
     model = Profile
     template_name = 'profile.html'
