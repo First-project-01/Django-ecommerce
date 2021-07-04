@@ -5,15 +5,14 @@ from .models import Items
 class ProductFilter(django_filters.FilterSet):
     sort = OrderingFilter(
         choices=(
-            ('-date_added', 'Latest products'),
             ('price', 'Lowest to Highest'),
             ('-price', 'Highest to Lowest'),
             ),
-        fields={
-            'price': 'price',
-        },
+        label = 'Sort By'
     )
     price = RangeFilter()
     class Meta:
         model = Items
         fields = ['size', 'category']
+
+

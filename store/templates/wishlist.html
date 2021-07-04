@@ -1,5 +1,5 @@
-{% extends "base.html" %}
-{% load crispy_forms_tags %}
+{% extends 'base.html' %}
+{% load static %}
 {% block toggler %}
    		<li class="nav-item"><a class="nav-link" href="{% url 'store:home-page' %}">Home</a>
                     <span class="sr-only">(current)</span>
@@ -17,7 +17,7 @@
 			</div>
 		</li>
 		{% if request.user.is_authenticated %}
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown active">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
         <span class="sr-only">(current)</span>
         <div class="dropdown-menu">
@@ -29,32 +29,50 @@
     </li>
 		<li class="nav-item"><a class="nav-link" href="{% url 'logout-page' %}">Logout</a></li>
 		{% else %}
-		<li class="nav-item active"><a class="nav-link" href="{% url 'login-page' %}">Login</a></li>
+		<li class="nav-item"><a class="nav-link" href="{% url 'login-page' %}">Login</a></li>
 		{% endif %}
 {% endblock toggler %}
 {% block content %}
-<div class="container" style="padding: 60px;">
-    <div class="content-section">
-        <br>
-        <br>
-        <form method="POST" style="width:40%;">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-warning" type="submit">Sign Up</button>
+<div class="page-heading about-heading header-text" style="background-image: {% static 'images/heading-6-1920x500.jpg' %};">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h2>Wishlist</h2>
             </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Already Have An Account? <a class="ml-2" href="{% url 'login-page' %}">Sign In</a>
-            </small>
-            <br>
-            <br>
+          </div>
         </div>
     </div>
 </div>
+    <br>
+    <br>
+<div class="col-12 mx-auto">
+  {% if wishlist %}
+  {% for product in wishlist  %}
 
-{% endblock content %}
+  <div class="card mb-3 rounded-0">
+    <div class="row g-0">
+      <div class="col-md-4 col-xs-12">
+              <img src="{{ product.image.url }}" alt="" class="img-fluid wc-image">
+        </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <h5 class="card-title">{{product.title}}</h5>
+          <p class="card-text">{{product.description}}</p>
+          <p class="card-text"><small class="text-muted">{{product.price}}</small></p>
+          <a type="button" class="btn btn-primary fw500 btn-sm" href="{% url 'store:add_wishlist' product.id %}">Remove from Wishlist</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+  {% else %}
+  <p class="card-text">No products have been added to your wishlist yet</p>
+  {% endif %}
+
+
+
+</div>
+{% endblock content%}
+
