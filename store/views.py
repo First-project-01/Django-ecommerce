@@ -8,11 +8,16 @@ from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from .models import *
 from .filters import ProductFilter
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 
 def payment(request):
-    return HttpResponse('Payment Page')
+    return HttpResponseRedirect('Payment Page')
+
+
+class ProfileView(DetailView):
+    model = Profile
+    template_name = 'profile.html'
 
 
 class HomeView(ListView):
@@ -23,6 +28,7 @@ class HomeView(ListView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['banners'] = Banner.objects.all()
+        context['profile'] = Profile.objects.all()
         return context
 
 
@@ -43,8 +49,6 @@ class Product(ListView):
         filter = ProductFilter(self.request.GET, queryset)
         context["filter"] = filter
         return context
-    
-
 
 
 class ProductDetails(DetailView):
@@ -242,16 +246,35 @@ def remove_single_item_from_cart(request, slug):
         return redirect(reverse('store:cart-page'))
 
 
+@login_required
+def wishlist(request):
+    products = Items.objects.filter(wishlist=request.user)
+    return render(request, "wishlist.html", {"wishlist": products})
+
+
+@login_required
+def add_to_wishlist(request, id):
+    product = get_object_or_404(Items, id=id)
+    if product.wishlist.filter(id=request.user.id).exists():
+        product.wishlist.remove(request.user)
+        messages.success(request, product.title + " has been removed from your WishList")
+    else:
+        product.wishlist.add(request.user)
+        messages.success(request, "Added " + product.title + " to your WishList")
+    return HttpResponseRedirect(request.META["HTTP_REFERER"])
+
+
+def order_history(request):
+    orders = Cart.objects.filter(user=request.user, ordered=True).order_by('-id')
+    return render(request, 'order_history.html', {'orders' : orders})
+
+
 def about_us(request):
     return render(request, 'about-us.html')
 
 
 def contact_us(request):
     return render(request, 'contact.html')
-
-
-def blogs(request):
-    return render(request, 'blog.html')
 
 
 def terms(request):

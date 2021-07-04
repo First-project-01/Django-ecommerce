@@ -1,24 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block toggler %}
-        <li class="nav-item"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
+   		<li class="nav-item"><a class="nav-link" href="{% url 'store:home-page' %}">Home</a>
                     <span class="sr-only">(current)</span>
-        </li>
-        <li class="nav-item dropdown active">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
-            <span class="sr-only">(current)</span>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="{% url 'store:about-us' %}">About Us</a>
-              <a class="dropdown-item" href="{% url 'store:contact-us' %}">Contact Us</a>
-              <a class="dropdown-item" href="{% url 'store:terms' %}">Terms & Conditions</a>
-            </div>
-        </li>
-        {% if request.user.is_authenticated %}
-        <li class="nav-item"><a class="nav-link" href="{% url 'store:cart-page'%}">Cart</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'logout-page' %}">Logout</a></li>
-        {% else %}
-        <li class="nav-item"><a class="nav-link" href="{% url 'login-page' %}">Login</a></li>
-        {% endif %}
+		</li>
+   		<li class="nav-item"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
+                    <span class="sr-only">(current)</span>
+		</li>
+		<li class="nav-item dropdown active">
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
+			<span class="sr-only">(current)</span>
+			<div class="dropdown-menu">
+			  <a class="dropdown-item" href="{% url 'store:about-us' %}">About Us</a>
+			  <a class="dropdown-item" href="{% url 'store:contact-us' %}">Contact Us</a>
+			  <a class="dropdown-item" href="{% url 'store:terms' %}">Terms & Conditions</a>
+			</div>
+		</li>
+		{% if request.user.is_authenticated %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
+        <span class="sr-only">(current)</span>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'store:wishlist' %}">Wishlist</a>
+          <a class="dropdown-item" href="{% url 'store:cart-page' %}">Cart</a>
+          <a class="dropdown-item" href="{% url 'store:order_history' %}">My Orders</a>
+          <a class="dropdown-item" href="{% url 'password_reset' %}">Change credentials</a>
+        </div>
+    </li>
+		<li class="nav-item"><a class="nav-link" href="{% url 'logout-page' %}">Logout</a></li>
+		{% else %}
+		<li class="nav-item"><a class="nav-link" href="{% url 'login-page' %}">Login</a></li>
+		{% endif %}
 {% endblock toggler %}
 {% block content %}
     <!-- Page Content -->

@@ -36,19 +36,28 @@ class BaseModel(models.Model):
 class Banner(BaseModel):
     image = models.ImageField(upload_to='banner', null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        try:
+            this = Banner.objects.get(id=self.id)
+            if this.image != self.image or this.image == 'clear':
+                this.image.delete()
+        except: pass
+        super(Banner, self).save(*args, **kwargs)
+
 
 class Profile(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=10, null=True)
 
     def __str__(self):
         return self.user.username
 
-    @receiver(post_save, sender=User)  # add this
+    @receiver(post_save, sender=User)  
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             Profile.objects.create(user=instance)
 
-    @receiver(post_save, sender=User)  # add this
+    @receiver(post_save, sender=User)  
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
 
@@ -65,6 +74,7 @@ class Items(BaseModel):
     image = ResizedImageField(upload_to="", null=True, blank=True)
     slug = models.SlugField(max_length=100)
     date_added = models.DateField(default=timezone.now)
+    wishlist = models.ManyToManyField(User, related_name="wishlist", blank=True)
 
     def save(self, *args, **kwargs):
         try:
@@ -90,6 +100,19 @@ class Items(BaseModel):
         return reverse("store:remove-cart", kwargs={
             'slug': self.slug
         })
+    
+    def get_add_to_wishlist_url(self):
+        return reverse("store:add", kwargs={
+            'slug': self.slug
+        })
+
+    def get_remove_wishlist_url(self):
+        return reverse("store:remove", kwargs={
+            'slug': self.slug
+        })
+
+    class Meta:
+        verbose_name_plural = 'Products'
 
 
 class OrderItem(BaseModel):

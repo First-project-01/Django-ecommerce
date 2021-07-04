@@ -33,6 +33,15 @@ class AddressAdmin(admin.ModelAdmin):
     search_fields = ['user', 'address', 'pincode']
 
 
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = [
+        'user',
+        'phone',
+    ]
+    list_display_links = [
+        'user',
+    ]
+
 class ItemsAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title","size")}
 
@@ -42,4 +51,4 @@ admin.site.register(Banner)
 admin.site.register(Cart, CartAdmin)
 admin.site.register(OrderItem)
 admin.site.register(Address, AddressAdmin)
-admin.site.register(Profile)
+admin.site.register(Profile, ProfileAdmin)
