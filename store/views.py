@@ -12,7 +12,7 @@ from django.http import HttpResponseRedirect
 
 
 def payment(request):
-    return HttpResponseRedirect('Payment Page')
+    return render(request, 'payment.html')
 
 
 class ProfileView(DetailView):
