@@ -1,47 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
-{% block toggler %}
-   		<li class="nav-item"><a class="nav-link" href="{% url 'store:home-page' %}">Home</a>
-                    <span class="sr-only">(current)</span>
-		</li>
-   		<li class="nav-item"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
-                    <span class="sr-only">(current)</span>
-		</li>
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
-			<span class="sr-only">(current)</span>
-			<div class="dropdown-menu">
-			  <a class="dropdown-item" href="{% url 'store:about-us' %}">About Us</a>
-			  <a class="dropdown-item" href="{% url 'store:contact-us' %}">Contact Us</a>
-			  <a class="dropdown-item" href="{% url 'store:terms' %}">Terms & Conditions</a>
-			</div>
-		</li>
-		{% if request.user.is_authenticated %}
-    <li class="nav-item dropdown active">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
-        <span class="sr-only">(current)</span>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="{% url 'store:wishlist' %}">Wishlist</a>
-          <a class="dropdown-item" href="{% url 'store:cart-page' %}">Cart</a>
-          <a class="dropdown-item" href="{% url 'store:order_history' %}">My Orders</a>
-          <a class="dropdown-item" href="{% url 'password_reset' %}">Change credentials</a>
-        </div>
-    </li>
-		<li class="nav-item"><a class="nav-link" href="{% url 'logout-page' %}">Logout</a></li>
-		{% else %}
-		<li class="nav-item"><a class="nav-link" href="{% url 'login-page' %}">Login</a></li>
-		{% endif %}
-{% endblock toggler %}
 {% block content%}
-<div class="page-heading about-heading header-text" style="background-image: {% static 'images/heading-6-1920x500.jpg' %};">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="text-content">
-              <h2>Payment Page</h2>
-            </div>
-          </div>
-        </div>
-    </div>
+<div class="container" style = "center;color:#d7d7d7">
+  <h1 style="text-align:center">Redirecting you to the merchant...</h1>
+  <h1 style="text-align:center">Please do not refresh your page...</h1>
+  <form action="https://securegw-stage.paytm.in/theia/processTransaction" method="post" name="paytm">
+      {% for key, value in param_dict.items %}
+      <input type="hidden" name="{{key}}" value="{{value}}">
+      {% endfor %}
+
+  </form>
 </div>
-{% endblock content%}
+{% endblock content %}
+{% block extra_scripts %}
+  <script>
+  document.paytm.submit()
+  </script>
+{% endblock extra_scripts %}
+<!--https://securegw.paytm.in/theia/processTransaction-->

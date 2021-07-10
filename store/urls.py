@@ -17,10 +17,10 @@ urlpatterns = [
     path('order_history', views.order_history, name='order_history'),
     path('remove-item-from-cart/<slug>/', views.remove_single_item_from_cart,
          name='remove-single'),
-    path('payment/', views.payment, name='payment-page'),
     path('about-us', views.about_us, name='about-us'),
     path('contact-us', views.contact_us, name='contact-us'),
     path('terms', views.terms, name='terms'),
+    path('handlerequest/', views.handlerequest, name='handlerequest'),
     #path('oauth/', 'social_django.urls', name='social'),
 ]
 

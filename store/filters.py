@@ -10,7 +10,6 @@ class ProductFilter(django_filters.FilterSet):
             ),
         label = 'Sort By'
     )
-    price = RangeFilter()
     class Meta:
         model = Items
         fields = ['size', 'category']

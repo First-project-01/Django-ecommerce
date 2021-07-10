@@ -51,24 +51,43 @@
     <br>
     <br>
 
-    <!--Filter-->
-    <div class="row">
+   <!--Filter-->
+    <div class="call-to-action">
       <div class="container">
-        <form method="get" style="width:40%">
-          {{filter.form|crispy}}
-          <button type="submit" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-search"></span> Search</button>
-        </form> 
+        <div class="row">
+          <div class="col-md-12">
+            <div class="inner-content shadow rounded" style="margin-top:0px;padding:0px">
+              <div class="container" style="text-align:center;">
+                <form method="get">
+                  <div class="row">
+                    <div class="col-sm-3" style="padding:10px;">
+                      {{ filter.form.size|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-3" style="padding:10px;">
+                      {{ filter.form.category|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-3" style="padding:10px;">
+                      {{ filter.form.sort|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-2" style="padding:40px;">  
+                      <button type="submit" class="btn" style="background-color:#cd9921;color:#fff">Search</button>
+                    </div>          
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <hr>
    
     <div class="products">
       <div class="container">
         <div class="row">
             {% for item in object_list %}
                 <div class="col-md-4">
-                    <div class="product-item">
-                      <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" alt=""></a>
+                    <div class="product-item shadow rounded">
+                      <div class="shadow rounded"><a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" alt=""></a></div>
                       <div class="down-content">
                         <a href="{{ item.get_absolute_url }}"><h4>{{ item.title }} ({{ item.size }})</h4></a>
                           <h6>
@@ -79,6 +98,18 @@
                             {% endif %}
                           </h6>
                         <p>{{ item.description|truncatechars:40 }}</p>
+                        <div class="container" style="padding-top:10px;">
+                          <div class="row">
+                            <div class="col-sm-3">
+                            <a href="{% url 'store:add_wishlist' item.id %}" class="filled-button shadow rounded" style="padding:14px; align:center"><i class="fa fa-heart"></i></a>
+                            </div> 
+                            <div class="col-sm-8">
+                              <a href="{{ item.get_add_to_cart_url }}" class="filled-button shadow rounded">
+                                Add to Cart
+                              </a>
+                            </div>
+                          </div>
+                        </div> 
                       </div>
                     </div>
                   </div>

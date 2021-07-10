@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fb39c742-fd42-41bc-970e-bb0db06ef3c9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/media/banner/banner1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/banner/banner1_RQdWZm3.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/banner/banner2.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/banner/banner2_OdHMN53.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/banner1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/banner2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/product1_OQuXxgZ.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/filters.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/filters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/products.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/products.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/views.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1ulmq7oJeOtfaus3z6sCwAY0B0o" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fb39c742-fd42-41bc-970e-bb0db06ef3c9" name="Default Changelist" comment="" />
+      <created>1625248745668</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1625248745668</updated>
+      <workItem from="1625248752552" duration="22000" />
+    </task>
+    <servers />
+  </component>
+</project>

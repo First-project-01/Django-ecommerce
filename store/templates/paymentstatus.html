@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-heading about-heading header-text" style="background-image: {% static 'images/background-index.jpg' %};">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h2>Thank you</h2>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="container" style="center; padding:60px">
+    <div class="col my-4">
+
+        <h2>Payment status regarding your order Id {{response.ORDERID}}</h2>
+        <hr>
+        {% if response.RESPCODE == '01' %}
+            <h6 style="color:#806200; weight:bold">The order was a sucess! Thank you for shopping with us.</h6>
+        {% else %}
+            <h6 style="color:#806200; weight:bold">Oops! The order wasn't successful. Try again! In case any amount was deducted, contact us 
+            <a href="https://api.whatsapp.com/send/?phone=917031691369&text&app_absent=0" target="_blank" here>.</h6>
+        {% endif%}
+
+    </div>
+    <br>
+    
+    <div class="shadow rounded" style="padding:40px;" >   
+        {{response}}
+    </div>
+<br>
+<br>
+<br>
+</div>
+{% endblock content %}

@@ -55,8 +55,8 @@
           </div>
           {% for item in object_list|slice:":6" %} <!--Limit to 6 items-->
           <div class="col-md-4">
-            <div class="product-item">
-                <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" alt=""></a>
+            <div class="product-item shadow rounded">
+                <div class="shadow rounded"><a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" alt=""></a></div>
               <div class="down-content">
                 <a href="{{ item.get_absolute_url }}"><h4>{{ item.title }} ({{ item.size }})</h4></a>
                 <h6>
@@ -67,6 +67,18 @@
                   {% endif %}
                 </h6>
                 <p>{{ item.description|truncatechars:30 }}</p>
+                <div class="container" style="padding-top:10px;">
+                  <div class="row">
+                    <div class="col-sm-3">
+                    <a href="{% url 'store:add_wishlist' item.id %}" class="filled-button shadow rounded" style="padding:14px; align:center"><i class="fa fa-heart"></i></a>
+                    </div> 
+                    <div class="col-sm-8">
+                      <a href="{{ item.get_add_to_cart_url }}" class="filled-button shadow rounded">
+                        Add to Cart
+                      </a>
+                    </div>
+                  </div>
+                </div> 
               </div>
             </div>
           </div>

@@ -46,20 +46,33 @@
       </div>
     </div>
 
+    <div class="mt-5 pt-4">
+    	{% if messages %}
+        	{% for message in messages %}
+        	<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          	{{ message }}
+          	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            	<span aria-hidden="true">&times;</span>
+          	</button>
+        	</div>
+        	{% endfor %}
+    	{% endif %}
+    </div>
+
     <div class="products">
       <div class="container">
         <div class="row">
           <div class="col-md-4 col-xs-12">
-              <img src="{{ object.image.url }}" alt="" class="img-fluid wc-image">
-          </div>
-       
-          
-        <div class="col-md-8 col-xs-12">
+              <div class="product-item">
+                 <div class="shadow rounded"><a href="{{ object.get_absolute_url }}"><img src="{{ object.image.url }}" alt=""></a></div>
+              </div>      
+          </div>    
+        <div class="col-md-8 col-xs-12" style="padding-left:20px">
           <br>
           <form action="#" method="post" class="form">
-            <h2 style="colour: #806200">{{ object.title }} ({{ object.size }})</h2>
+            <h2>{{ object.title }} ({{ object.size }})</h2>
+            <hr>
             <br>
-
               <p class="lead">
                 {% if object.discount_price %}
                 <small><del>Rs.{{ object.price|floatformat:2 }}</del></small>
@@ -68,28 +81,24 @@
                 Rs.{{ object.price|floatformat:2}}
                 {% endif %}
               </p>
-
               <br>
-
               <p class="lead">
                 {{ object.description }}
               </p>
-
-              <br>
-
-              <div class="row">
-                <div class="col-sm-8">
-                  <div class="col-sm-6">
-                   <a href="{% url 'store:add_wishlist' object.id %}" class="btn btn-success btn-block">Wishlist</a>
-                   <a href="{{ object.get_add_to_cart_url }}" class="btn btn-success btn-block">Add to Cart</a>
-                    <!--<a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-block">Remove from cart</a> <!-- check -->
+              <div class="container" style="padding-top:30px">
+                <div class="row">
+                  <div class="col-sm-1">
+                   <a href="{% url 'store:add_wishlist' object.id %}" class="filled-button" style="padding:14px;"><i class="fa fa-heart"></i></a>
+                  </div> 
+                  <div class="col-sm-3">
+                    <a href="{{ object.get_add_to_cart_url }}" class="filled-button">
+                      Add to Cart
+                    </a>
                   </div>
                 </div>
-              </div>
-
+              </div>  
             </div>
           </form>
-
         </div>
       </div>
     </div>

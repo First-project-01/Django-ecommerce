@@ -146,6 +146,10 @@ EMAIL_USE_TLS = True
 #EMAIL_HOST_USER = ''
 #EMAIL_HOST_PASSWORD = ''
 
+MERCHANT_KEY = 'g_RV1h#RJyLt#hsp'
+MERCHANT_ID = 'RCTaMb66211132431836'
+CALLBACK_URL = 'http://127.0.0.1:8000/store/handlerequest/'
+
 #SOCIAL_AUTH_URL_NAMESPACE = "store:social"
 
 #SOCIAL_AUTH_GOOGLE_KEY = '703423017916-nfdd02c6soli25mbd9e177911aesqnjd.apps.googleusercontent.com'
