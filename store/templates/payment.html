@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content%}
-<div class="container" style = "center;color:#d7d7d7">
+{% comment %} <div class="container" style = "center;color:#d7d7d7">
   <h1 style="text-align:center">Redirecting you to the merchant...</h1>
   <h1 style="text-align:center">Please do not refresh your page...</h1>
   <form action="https://securegw-stage.paytm.in/theia/processTransaction" method="post" name="paytm">
@@ -16,5 +16,6 @@
   <script>
   document.paytm.submit()
   </script>
-{% endblock extra_scripts %}
+{% endblock extra_scripts %} {% endcomment %}
+<h2> Payment Page </h2>
 <!--https://securegw.paytm.in/theia/processTransaction-->

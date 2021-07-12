@@ -8,11 +8,12 @@ from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from .models import *
 from .filters import ProductFilter
-from django.views.decorators.csrf import csrf_exempt
-from . import Checksum
 from django.http import HttpResponseRedirect
-MERCHANT_KEY = 'g_RV1h#RJyLt#hsp'
 
+
+def payment(request):
+    return render(request, 'payment.html')
+    
 
 class ProfileView(DetailView):
     model = Profile
@@ -53,7 +54,6 @@ class Product(ListView):
 class ProductDetails(DetailView):
     model = Items
     template_name = 'product-details.html' 
-    
 
 
 class CheckoutView(View):
@@ -128,18 +128,19 @@ class CheckoutView(View):
                     else:
                         messages.info(
                             self.request, "Please fill in the required shipping address fields")
-                    param_dict = {
-                        'MID': 'RCTaMb66211132431836',
-                        'ORDER_ID': str(order.cart_id),
-                        'TXN_AMOUNT': str(amount),
-                        'CUST_ID': self.request.user.email,
-                        'INDUSTRY_TYPE_ID': 'Retail',
-                        'WEBSITE': 'WEBSTAGING',
-                        'CHANNEL_ID': 'WEB',
-                        'CALLBACK_URL': 'http://127.0.0.1:8000/handlerequest/'
-                    }
-                    param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, MERCHANT_KEY)
-                    return render(self.request, 'payment.html', {'param_dict': param_dict})
+                    # param_dict = {
+                    #     'MID': 'RCTaMb66211132431836',
+                    #     'ORDER_ID': str(order.cart_id),
+                    #     'TXN_AMOUNT': str(amount),
+                    #     'CUST_ID': self.request.user.email,
+                    #     'INDUSTRY_TYPE_ID': 'Retail',
+                    #     'WEBSITE': 'WEBSTAGING',
+                    #     'CHANNEL_ID': 'WEB',
+                    #     'CALLBACK_URL': 'http://127.0.0.1:8000/handlerequest/'
+                    # }
+                    # param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, MERCHANT_KEY)
+                    # return render(self.request, 'payment.html', {'param_dict': param_dict})
+            return redirect(reverse('store:payment-page'))
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
             return redirect(reverse('store:cart-page'))
@@ -274,7 +275,7 @@ def add_to_wishlist(request, id):
         messages.success(request, "Added " + product.title + " to your wishList")
     return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
-
+    
 def order_history(request):
     orders = Cart.objects.filter(user=request.user, ordered=True).order_by('-id')
     return render(request, 'order_history.html', {'orders' : orders})
@@ -291,19 +292,3 @@ def contact_us(request):
 def terms(request):
     return render(request, 'terms.html')
 
-@csrf_exempt
-def handlerequest(request):
-    # paytm will send you post request here
-    form = request.POST
-    response_dict = {}
-    for i in form.keys():
-        response_dict[i] = form[i]
-        if i == 'CHECKSUMHASH':
-            checksum = form[i]
-    verify = Checksum.verify_checksum(response_dict, MERCHANT_KEY, checksum)
-    if verify:
-        if response_dict['RESPCODE'] == '01':
-            print('Order has been placed successfully!')
-        else:
-            print('Order was not successful because' + response_dict['RESPMSG'])
-    return render(request, 'paymentstatus.html', {'response': response_dict})

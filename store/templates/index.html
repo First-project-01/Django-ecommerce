@@ -43,6 +43,19 @@
           {% endfor %}
         </div>
       </div>
+    
+    <div class="container mt-2" style="width:40%">
+    	{% if messages %}
+        	{% for message in messages %}
+        	<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          	{{ message }}
+          	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            	<span aria-hidden="true">&times;</span>
+          	</button>
+        	</div>
+        	{% endfor %}
+    	{% endif %}
+    </div>  
 
     <div class="latest-products">
       <div class="container">
@@ -67,17 +80,10 @@
                   {% endif %}
                 </h6>
                 <p>{{ item.description|truncatechars:30 }}</p>
-                <div class="container" style="padding-top:10px;">
-                  <div class="row">
-                    <div class="col-sm-3">
-                    <a href="{% url 'store:add_wishlist' item.id %}" class="filled-button shadow rounded" style="padding:14px; align:center"><i class="fa fa-heart"></i></a>
-                    </div> 
-                    <div class="col-sm-8">
-                      <a href="{{ item.get_add_to_cart_url }}" class="filled-button shadow rounded">
-                        Add to Cart
-                      </a>
-                    </div>
-                  </div>
+                <ul class="social-icons">
+                <li><a href="{% url 'store:add_wishlist' item.id %}" class="filled-button" style="padding:20px;"><i class="fa fa-heart"></i></a></li>
+                <li><a href="{{ item.get_add_to_cart_url }}" class="filled-button" style="padding:20px;"><i class="fa fa-shopping-cart"></i></a></li>
+                </ul>
                 </div> 
               </div>
             </div>
@@ -98,13 +104,7 @@
           <div class="col-md-6">
             <div class="left-content">
               <p>Anju’s Home Decore endeavors to provide personally assured best quality home decore products to each and every individual associated with us.We strongly believe that honesty pays off with greater trust and understanding. Our objective to grow and maintain our promise with every customer availing to our services.</p>
-              <!--<ul class="featured-list">
-                <li><a href="#">Lorem ipsum dolor sit amet</a></li>
-                <li><a href="#">Consectetur an adipisicing elit</a></li>
-                <li><a href="#">It aquecorporis nulla aspernatur</a></li>
-                <li><a href="#">Corporis, omnis doloremque</a></li>
-              </ul>-->
-              <a href="{% url 'store:about-us' %}" class="filled-button">Read More</a>
+              <a href="{% url 'store:about-us' %}" class="filled-button shadow rounded">Read More</a>
             </div>
           </div>
           <div class="col-md-6">

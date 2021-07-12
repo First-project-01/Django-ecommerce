@@ -148,7 +148,6 @@ class Cart(BaseModel):
     ordered = models.BooleanField(default=False)
     shipping_address = models.ForeignKey(
         'Address', on_delete=models.SET_NULL, blank=True, null=True)
-    cart_id = models.AutoField(primary_key=True)
     # payment = models.ForeignKey('Payment', on_delete=models.SET_NULL, blank=True, null=True)
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)

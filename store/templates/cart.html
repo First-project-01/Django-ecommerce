@@ -46,7 +46,7 @@
         </div>
       </div>
     </div>
-	<div class="mt-5 pt-4">
+	<div class="container mt-2" style="width:30%">
     	{% if messages %}
         	{% for message in messages %}
         	<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -106,11 +106,6 @@
 					{% empty %}
 					<tr>
 						<td colspan='5'>Your cart is empty</td>
-					</tr>
-					<tr>
-						<td colspan="5">
-						<!-- <a class='btn btn-primary float-right' href="{% url 'store:home-page' %}">Continue shopping</a> -->
-						</td>
 					</tr>
 					{% endfor %}
 					{% if object.get_total %}

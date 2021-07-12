@@ -33,20 +33,18 @@
 		{% endif %}
 {% endblock toggler %}
 {% block content %}
-    <!-- Page Content -->
-    <div class="page-heading about-heading header-text" style="background-image: {% static 'images/heading-6-1920x500.jpg' %}">
+<div class="page-heading about-heading header-text" style="background-image: url(assets/images/heading-1-1920x500.jpg);">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="text-content">
-              <h2>Product details</h2>
+              <h3 style="color:#fff">GET TO KNOW MORE!</h3>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="mt-5 pt-4">
+    <div class="container mt-2" style="width:40%">
     	{% if messages %}
         	{% for message in messages %}
         	<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -58,49 +56,40 @@
         	{% endfor %}
     	{% endif %}
     </div>
-
-    <div class="products">
+    <div class="best-features about-features">
       <div class="container">
         <div class="row">
-          <div class="col-md-4 col-xs-12">
-              <div class="product-item">
-                 <div class="shadow rounded"><a href="{{ object.get_absolute_url }}"><img src="{{ object.image.url }}" alt=""></a></div>
-              </div>      
-          </div>    
-        <div class="col-md-8 col-xs-12" style="padding-left:20px">
-          <br>
-          <form action="#" method="post" class="form">
-            <h2>{{ object.title }} ({{ object.size }})</h2>
-            <hr>
-            <br>
-              <p class="lead">
-                {% if object.discount_price %}
-                <small><del>Rs.{{ object.price|floatformat:2 }}</del></small>
-                <strong class="text-primary">Rs.{{ object.discount_price|floatformat:2 }}</strong>
-                {% else %}
-                Rs.{{ object.price|floatformat:2}}
-                {% endif %}
-              </p>
-              <br>
-              <p class="lead">
-                {{ object.description }}
-              </p>
-              <div class="container" style="padding-top:30px">
-                <div class="row">
-                  <div class="col-sm-1">
-                   <a href="{% url 'store:add_wishlist' object.id %}" class="filled-button" style="padding:14px;"><i class="fa fa-heart"></i></a>
-                  </div> 
-                  <div class="col-sm-3">
-                    <a href="{{ object.get_add_to_cart_url }}" class="filled-button">
-                      Add to Cart
-                    </a>
-                  </div>
-                </div>
-              </div>  
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h1 style="color:#806200">{{ object.title }}</h1>
             </div>
-          </form>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image" style="width:80%">
+              <a href="{{ object.get_absolute_url }}"><img src="{{ object.image.url }}" alt=""></a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-content"> 
+                <h3 style="color:#806200;">About the product</h3><br>
+                <p style="font-size:large; font-weight:500;">
+                  {% if object.discount_price %}
+                  <small><del>Price:  Rs.{{ object.price|floatformat:2 }}</del></small>
+                  Price:  Rs.{{ object.discount_price|floatformat:2 }}
+                  {% else %}
+                  Price:  Rs.{{ object.price|floatformat:2}}
+                  {% endif %}<br>
+                  Size:  {{ object.size }}</p> 
+                  <div>{{ object.description }}</div>
+            </div>
+            <ul class="social-icons">
+                <li> <a href="{% url 'store:add_wishlist' object.id %}" class="filled-button" style="padding:16px;"><i class="fa fa-heart"></i></a></li>
+                <li><a href="{{ object.get_add_to_cart_url }}" class="filled-button" style="padding:16px;"><i class="fa fa-shopping-cart"></i></a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    <br>
+    <br>
 {% endblock content %}

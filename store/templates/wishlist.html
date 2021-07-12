@@ -88,19 +88,11 @@
                 {% endif %}
               </h6>
               <p>{{ product.description|truncatechars:40 }}</p>
+              <ul class="social-icons">
+                <li><a href="{% url 'store:add_wishlist' product.id %}" class="filled-button" style="padding:20px;"><i class="fa fa-heart"></i></a></li>
+                <li><a href="{{ product.get_add_to_cart_url }}" class="filled-button" style="padding:20px;"><i class="fa fa-shopping-cart"></i></a></li>
+              </ul>
             </div>
-
-            <div class="container">
-              <div class="row">
-                <div class="col-sm-3" style="padding-left:40px;">
-                <a href="{% url 'store:add_wishlist' product.id %}" class="filled-button shadow rounded" style="padding:14px;"><i class="fa fa-heart"></i></a>
-                </div> 
-                <div class="col-sm-8">
-                  <a href="{{ product.get_add_to_cart_url }}" class="filled-button shadow rounded">
-                    Add to Cart
-                  </a>
-                </div>
-              </div>
             </div> <br> 
           </div> 
         </div>
