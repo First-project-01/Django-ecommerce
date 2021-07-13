@@ -8,6 +8,7 @@ from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from .models import *
 from .filters import ProductFilter
+from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 
 
@@ -236,7 +237,7 @@ def remove_single_item_from_cart(request, slug):
     )
     if order_qs.exists():
         order = order_qs[0]
-        # check if the order item is in the order
+        # check if the order item is in the order/cart
         if order.items.filter(product__slug=item.slug).exists():
             order_item = OrderItem.objects.filter(
                 product=item,
@@ -257,11 +258,15 @@ def remove_single_item_from_cart(request, slug):
         messages.info(request, "You do not have an active order")
         return redirect(reverse('store:cart-page'))
 
-
-@login_required
-def wishlist(request):
-    products = Items.objects.filter(wishlist=request.user)
-    return render(request, "wishlist.html", {"wishlist": products})
+ 
+class Wishlist(LoginRequiredMixin, View):
+    paginate_by = 6
+    def get(self, *args, **kwargs):
+            products = Items.objects.filter(wishlist=self.request.user)
+            context = {
+                'wishlist': products
+            }
+            return render(self.request, 'wishlist.html', context)  
 
 
 @login_required
@@ -275,10 +280,19 @@ def add_to_wishlist(request, id):
         messages.success(request, "Added " + product.title + " to your wishList")
     return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
-    
-def order_history(request):
-    orders = Cart.objects.filter(user=request.user, ordered=True).order_by('-id')
-    return render(request, 'order_history.html', {'orders' : orders})
+
+class OrderHistory(LoginRequiredMixin, View):
+    paginate_by = 6
+    def get(self, *args, **kwargs):
+        try:
+            order = Cart.objects.get(user=self.request.user, ordered=True)
+            context = {
+                'object': order
+            }
+            return render(self.request, 'order_history.html', context)
+        except ObjectDoesNotExist:
+            messages.warning(self.request, "You do not have any placed orders")
+            return render(self.request, 'order_history.html')  
 
 
 def about_us(request):

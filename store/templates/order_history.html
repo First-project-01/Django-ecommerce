@@ -33,5 +33,65 @@
 		{% endif %}
 {% endblock toggler %}
 {% block content%} 
-    <h1>Order Summary</h1>
+<div class="page-heading about-heading header-text" style="background-image: {% static 'images/heading-6-1920x500.jpg' %};">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-content">
+          <h2>order History</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="products">
+      <div class="container">
+        <div class="row">
+            {% for item in object.items.all %}
+                <div class="col-md-4">
+                    <div class="product-item shadow rounded">
+                      <a href="{{ item.product.get_absolute_url }}"><img src="{{ item.product.image.url }}" alt=""></a>
+                      <div class="down-content">
+                        <a href="{{ item.product.get_absolute_url }}"><h4>{{ item.product.title }} ({{ item.product.size }})</h4></a>
+                          <h6>
+                            {% if item.product.discount_price %}
+                            <small><del>Rs.{{ item.product.price }}</del></small>Rs.{{ item.product.discount_price }}
+                            {% else %}
+                            Rs.{{ item.product.price}}
+                            {% endif %}
+                          </h6>
+                        <p>{{ item.product.description|truncatechars:40 }}</p>
+                        <hr>
+                        <ul class="social-icons">
+                        <li> <h3>Status:</h3> </li>
+                        <li> <h5>Ordered</h5></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+            {% endfor %} 
+            <div class="col-md-12">
+            <ul class="pages">
+              {% if is_paginated %}
+              {% if page_obj.has_previous %}
+                <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+              {% endif %}
+              {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                  <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                  <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+              {% endfor %}
+              {% if page_obj.has_next %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+              {% endif %}
+            {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
 {% endblock content %}

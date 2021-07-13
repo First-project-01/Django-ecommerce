@@ -100,7 +100,7 @@
             {% for item in object_list %}
                 <div class="col-md-4">
                     <div class="product-item shadow rounded">
-                      <div class="shadow rounded"><a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" alt=""></a></div>
+                     <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" alt=""></a>
                       <div class="down-content">
                         <a href="{{ item.get_absolute_url }}"><h4>{{ item.title }} ({{ item.size }})</h4></a>
                           <h6>
@@ -119,6 +119,8 @@
                     </div>
                   </div>
             {% endfor %}
+
+           <!--Pagination--> 
           <div class="col-md-12">
             <ul class="pages">
               {% if is_paginated %}
