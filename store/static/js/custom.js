@@ -26,6 +26,8 @@ jQuery( document ).ready(function( $ ) {
           }
         });
         
+
+//        Happy Client courasel
         if ($('.owl-clients').length) {
             $('.owl-clients').owlCarousel({
                 loop: true,
@@ -57,6 +59,7 @@ jQuery( document ).ready(function( $ ) {
             });
         }
 
+        //Banner Couresal
         if ($('.owl-banner').length) {
             $('.owl-banner').owlCarousel({
                 loop: true,
