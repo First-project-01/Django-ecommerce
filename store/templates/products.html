@@ -9,7 +9,7 @@
    		<li class="nav-item active"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
                     <span class="sr-only">(current)</span>
 		</li>
-		<li class="nav-item dropdown">
+		{% comment %} <li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
 			<span class="sr-only">(current)</span>
 			<div class="dropdown-menu">
@@ -17,19 +17,19 @@
 			  <a class="dropdown-item" href="{% url 'store:contact-us' %}">Contact Us</a>
 			  <a class="dropdown-item" href="{% url 'store:terms' %}">Terms & Conditions</a>
 			</div>
-		</li>
+		</li> {% endcomment %}
 		{% if request.user.is_authenticated %}
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
         <span class="sr-only">(current)</span>
-        <div class="dropdown-menu">
+        <div class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" href="{% url 'store:wishlist' %}">Wishlist</a>
           <a class="dropdown-item" href="{% url 'store:cart-page' %}">Cart</a>
           <a class="dropdown-item" href="{% url 'store:order_history' %}">My Orders</a>
           <a class="dropdown-item" href="{% url 'password_reset' %}">Change credentials</a>
+          <a class="dropdown-item" href="{% url 'logout-page' %}">Logout</a>
         </div>
     </li>
-		<li class="nav-item"><a class="nav-link" href="{% url 'logout-page' %}">Logout</a></li>
 		{% else %}
 		<li class="nav-item"><a class="nav-link" href="{% url 'login-page' %}">Login</a></li>
 		{% endif %}
@@ -52,36 +52,32 @@
     <br>
 
    <!--Filter-->
-    <div class="call-to-action">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="inner-content shadow rounded" style="margin-top:0px;padding:0px">
-              <div class="container" style="text-align:center;">
-                <form method="get">
-                  <div class="row">
-                    <div class="col-sm-3" style="padding:10px;">
-                      {{ filter.form.size|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-3" style="padding:10px;">
-                      {{ filter.form.category|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-3" style="padding:10px;">
-                      {{ filter.form.sort|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-2" style="padding:40px;">  
-                      <button type="submit" class="btn" style="background-color:#cd9921;color:#fff">Search</button>
-                    </div>          
-                  </div>
-                </form>
-              </div>
+    
+    <div class="container">
+      <button class="btn btn-outline-secondary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Apply filter
+      </button>
+      <div class="collapse py-3" id="collapseExample">
+        <div class="container shadow rounded" style="background-color:#f7f7f7;">
+          <div class="row align-items-center text-center">
+            <div class="col-sm-3 py-2">
+              {{ filter.form.size|as_crispy_field }}
+            </div>
+            <div class="col-sm-3 py-2">
+              {{ filter.form.category|as_crispy_field }}
+            </div>
+            <div class="col-sm-3 py-2">
+              {{ filter.form.sort|as_crispy_field }}
+            </div>
+            <div class="col-sm-3 py-2">
+              <button type="submit" class="btn" style="background-color:#cd9921;color:#fff">Search</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="mt-2 pt-3">
+    <div class="mt-2 pt-3 d-flex justify-content-center">
     	{% if messages %}
         	{% for message in messages %}
         	<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -100,7 +96,7 @@
             {% for item in object_list %}
                 <div class="col-md-4">
                     <div class="product-item shadow rounded">
-                     <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" alt=""></a>
+                      <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" alt=""></a>
                       <div class="down-content">
                         <a href="{{ item.get_absolute_url }}"><h4>{{ item.title }} ({{ item.size }})</h4></a>
                           <h6>
@@ -111,16 +107,25 @@
                             {% endif %}
                           </h6>
                         <p>{{ item.description|truncatechars:40 }}</p>
-                        <ul class="social-icons">
-                        <li> <a href="{% url 'store:add_wishlist' item.id %}" class="filled-button" style="padding:20px;"><i class="fa fa-heart"></i></a></li>
-                        <li><a href="{{ item.get_add_to_cart_url }}" class="filled-button" style="padding:20px;"><i class="fa fa-shopping-cart"></i></a></li>
+
+                       <ul class="social-icons">
+                          <li> 
+                            <a href="{% url 'store:add_wishlist' item.id %}" class="filled-button">
+                              <i class="fa fa-heart py-2"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{ item.get_add_to_cart_url }}" class="filled-button">
+                              <i class="fa fa-shopping-cart py-2"></i>
+                            </a>
+                          </li>
                         </ul>
+
                       </div>
                     </div>
                   </div>
             {% endfor %}
 
-           <!--Pagination--> 
           <div class="col-md-12">
             <ul class="pages">
               {% if is_paginated %}

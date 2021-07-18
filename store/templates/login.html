@@ -8,55 +8,54 @@
    		<li class="nav-item"><a class="nav-link" href="{% url 'store:products-list' %}">Products</a>
                     <span class="sr-only">(current)</span>
 		</li>
+		{% if request.user.is_authenticated %}
 		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
 			<span class="sr-only">(current)</span>
-			<div class="dropdown-menu">
-			  <a class="dropdown-item" href="{% url 'store:about-us' %}">About Us</a>
-			  <a class="dropdown-item" href="{% url 'store:contact-us' %}">Contact Us</a>
-			  <a class="dropdown-item" href="{% url 'store:terms' %}">Terms & Conditions</a>
+			<div class="dropdown-menu dropdown-menu-right">
+			<a class="dropdown-item" href="{% url 'store:wishlist' %}">Wishlist</a>
+			<a class="dropdown-item" href="{% url 'store:cart-page' %}">Cart</a>
+			<a class="dropdown-item" href="{% url 'store:order_history' %}">My Orders</a>
+			<a class="dropdown-item" href="{% url 'password_reset' %}">Change credentials</a>
+			<a class="dropdown-item" href="{% url 'logout-page' %}">Logout</a>
 			</div>
 		</li>
-		{% if request.user.is_authenticated %}
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
-        <span class="sr-only">(current)</span>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="{% url 'store:wishlist' %}">Wishlist</a>
-          <a class="dropdown-item" href="{% url 'store:cart-page' %}">Cart</a>
-          <a class="dropdown-item" href="{% url 'store:order_history' %}">My Orders</a>
-          <a class="dropdown-item" href="{% url 'password_reset' %}">Change credentials</a>
-        </div>
-    </li>
-		<li class="nav-item"><a class="nav-link" href="{% url 'logout-page' %}">Logout</a></li>
 		{% else %}
 		<li class="nav-item active"><a class="nav-link" href="{% url 'login-page' %}">Login</a></li>
-		{% endif %}
+		{% endif %} 
 {% endblock toggler %}
 {% block content %}
 <br>
-<div class="container" style="padding: 60px;">
-    <div class="content-section">
-        <form method="POST" style="width:40%;">
+<div class="container" style="padding: 10vw;">
+    <div class="card shadow rounded" style="background-color:#f7f7f7;margin: 5vh;">
+        <form method="POST">
             {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Log In</legend>
-                <div class="form-details">
-                    {{ form|crispy }}
-                </div>
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Login</button>
-                <small class="text-muted">
-                    <a class="ml-2" href="{% url 'password_reset' %}">Forgot Password ?</a>
-                </small>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 py-2">
+                        {{ form.username|as_crispy_field }}
+                    </div>
+                    <div class="col-12 py-2">
+                        {{ form.password|as_crispy_field }}
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-outline-secondary" type="submit">Login</button>    
+                    </div>
+                    <div class="row m-1">
+                        <div class="col-12 pt-2">
+                            <small class="text-muted">
+                                <a href="{% url 'password_reset' %}">Forgot Password ?</a>
+                            </small>
+                        </div>
+                        <div class="col-12 pt-2">
+                            <small class="text-muted">
+                                Don't have an account? <a href="{% url 'register' %}">Sign Up Now</a>
+                            </small>
+                        </div>
+                    </div>
+                </div>    
             </div>
         </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Don't have an account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
-            </small>
-        </div>
     </div>
 </div>
 {% endblock content %}
