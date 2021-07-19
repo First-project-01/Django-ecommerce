@@ -189,9 +189,5 @@ class Address(BaseModel):
         verbose_name_plural = 'Addresses'
 
 
-class Refund(BaseModel):
-    pass
-
-
 class Payment(BaseModel):
     pass
