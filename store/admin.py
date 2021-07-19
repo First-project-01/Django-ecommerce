@@ -5,6 +5,7 @@ from .models import *
 class CartAdmin(admin.ModelAdmin):
     list_display = ['user',
                     'ordered',
+                    'ordered_date',
                     'being_delivered',
                     'received',
                     'shipping_address',
@@ -14,10 +15,12 @@ class CartAdmin(admin.ModelAdmin):
         'shipping_address',
     ]
     list_filter = ['ordered',
+                   'ordered_date',
                    'being_delivered',
                    'received',
                    'refund_requested',
                    'refund_granted']
+
 
 
 class AddressAdmin(admin.ModelAdmin):
@@ -42,11 +45,8 @@ class ProfileAdmin(admin.ModelAdmin):
         'user',
     ]
 
-class ItemsAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("title","size")}
 
-
-admin.site.register(Items, ItemsAdmin)
+admin.site.register(Items)
 admin.site.register(Banner)
 admin.site.register(Cart, CartAdmin)
 admin.site.register(OrderItem)

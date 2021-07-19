@@ -1,3 +1,4 @@
+from django.http.response import HttpResponseBadRequest
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import UserRegisterForm, CheckoutForm
 from django.contrib import messages
@@ -7,13 +8,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from .models import *
+from django.views.decorators.csrf import csrf_exempt
+import razorpay
 from .filters import ProductFilter
-from django.core.paginator import Paginator
+from django.conf import settings
 from django.http import HttpResponseRedirect
 
-
-def payment(request):
-    return render(request, 'payment.html')
+ID = settings.RAZORPAY_API_KEY_PUBLISHABLE
+KEY = settings.RAZORPAY_API_KEY_HIDDEN
+client = razorpay.Client(auth=(ID, KEY))
+client.set_app_details({"title" : "AHD", "version" : "<YOUR_APP_VERSION>"})
     
 
 class ProfileView(DetailView):
@@ -83,7 +87,6 @@ class CheckoutView(View):
         form = CheckoutForm(self.request.POST)
         try:
             order = Cart.objects.get(user=self.request.user, ordered=False)
-            amount = order.get_total()
             if form.is_valid():
                 use_default = form.cleaned_data.get(
                     'use_default')
@@ -129,22 +132,63 @@ class CheckoutView(View):
                     else:
                         messages.info(
                             self.request, "Please fill in the required shipping address fields")
-                    # param_dict = {
-                    #     'MID': 'RCTaMb66211132431836',
-                    #     'ORDER_ID': str(order.cart_id),
-                    #     'TXN_AMOUNT': str(amount),
-                    #     'CUST_ID': self.request.user.email,
-                    #     'INDUSTRY_TYPE_ID': 'Retail',
-                    #     'WEBSITE': 'WEBSTAGING',
-                    #     'CHANNEL_ID': 'WEB',
-                    #     'CALLBACK_URL': 'http://127.0.0.1:8000/handlerequest/'
-                    # }
-                    # param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, MERCHANT_KEY)
-                    # return render(self.request, 'payment.html', {'param_dict': param_dict})
-            return redirect(reverse('store:payment-page'))
+                    currency = 'INR'
+                    amount = amount = int(order.get_total() * 100)  # Rs. 200
+                    razorpay_order = client.order.create(dict(amount=amount, currency=currency, payment_capture='0'))
+                    razorpay_order_id = razorpay_order['id']
+                    callback_url = 'paymenthandler/'
+
+                    # we need to pass these details to frontend.
+                    context = {}
+                    context['razorpay_order_id'] = razorpay_order_id
+                    context['razorpay_merchant_key'] = ID
+                    context['razorpay_amount'] = amount
+                    context['currency'] = currency
+                    context['callback_url'] = callback_url
+                    return HttpResponseRedirect(reverse('store:checkout-page', kwargs={"context":context}))
+
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
-            return redirect(reverse('store:cart-page'))
+            return redirect(reverse('store:cart-page'))         
+
+
+@csrf_exempt
+def paymenthandler(request):
+    if request.method == "POST":
+        order = Cart.objects.get(user=request.user, ordered=False)
+        try:
+            payment_id = request.POST.get('razorpay_payment_id', '')
+            razorpay_order_id = request.POST.get('razorpay_order_id', '')
+            signature = request.POST.get('razorpay_signature', '')
+            params_dict = {
+                'razorpay_order_id': razorpay_order_id,
+                'razorpay_payment_id': payment_id,
+                'razorpay_signature': signature
+            }
+            # verify the payment signature.
+            result = client.utility.verify_payment_signature(
+                params_dict)
+            if result is None:
+                amount = int(order.get_total() * 100)  # Rs. 200
+                try:
+                    # capture the payemt
+                    client.payment.capture(payment_id, amount)
+                    order.ordered = True
+                    # render success page on successful caputre of payment
+                    return render(request, 'paymentstatus.html')
+                except:
+                    # if there is an error while capturing payment.
+                    return render(request, 'paymentstatus.html')
+            else:
+  
+                # if signature verification fails.
+                return render(request, 'paymentstatus.html')
+        except:
+            # if we don't find the required parameters in POST data
+            return HttpResponseBadRequest()
+    else:
+       # if other than POST request is made.
+        return HttpResponseBadRequest()
 
 
 def register(request):
@@ -194,8 +238,7 @@ def add_to_cart(request, slug):
             messages.info(request, "This item was added to your cart.")
             return redirect(reverse('store:cart-page'))
     else:
-        ordered_date = timezone.now()
-        order = Cart.objects.create(user=request.user, ordered_date=ordered_date)
+        order = Cart.objects.create(user=request.user)
         order.items.add(order_item)
         messages.info(request, "This item was added to your cart.")
         return redirect(reverse('store:cart-page'))

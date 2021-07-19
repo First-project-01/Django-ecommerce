@@ -20,7 +20,7 @@ urlpatterns = [
     path('about-us', views.about_us, name='about-us'),
     path('contact-us', views.contact_us, name='contact-us'),
     path('terms', views.terms, name='terms'),
-    path('payment', views.payment, name='payment-page'),
+    path('paymenthandler', views.paymenthandler, name='paymenthandler')
     #path('oauth/', 'social_django.urls', name='social'),
 ]
 

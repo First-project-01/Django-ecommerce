@@ -75,7 +75,7 @@
                         <div class="inner-content shadow rounded">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <h4 style="color:#cd9921">Anju's Home Decor </h4>
+                                    <h4 style="color:#cd9921">Anju's Home Decore </h4>
                   
                                     <p>We value customers' feedback the most. Kindly reach out to us for any assistance.</p>
                                 </div>
@@ -87,40 +87,30 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div><br><br><br>
         <hr>
         <div class="row">
-          <div class="col-12 col-md">
-          <a href="#">Bottle Shop</a>
-          <small class="d-block mb-3 text-muted">&copy; 2017-2020</small>
+          <div class="col-3">
+          <a href="{% url 'store:home-page' %}">Anju's Home Decore</a>
+          <!-- <small class="d-block mb-3 text-muted">&copy; 2017-2020</small> -->
           </div>
-          <div class="col-6 col-md">
-          <h5>Features</h5>
+          <div class="col-3">
           <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Cool stuff</a></li>
-              <li><a class="text-muted" href="#">Random feature</a></li>
-              <li><a class="text-muted" href="#">Team feature</a></li>
-              <li><a class="text-muted" href="#">Stuff for developers</a></li>
-              <li><a class="text-muted" href="#">Another one</a></li>
-              <li><a class="text-muted" href="#">Last time</a></li>
+              <li><a class="text-muted" href="{% url 'store:home-page' %}">Featured Products</a></li>
+              <li><a class="text-muted" href="{% url 'store:products-list' %}">All Products</a></li>
           </ul>
           </div>
-          <div class="col-6 col-md">
-          <h5>Resources</h5>
+          <div class="col-3">
           <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Resource</a></li>
-              <li><a class="text-muted" href="#">Resource name</a></li>
-              <li><a class="text-muted" href="#">Another resource</a></li>
-              <li><a class="text-muted" href="#">Final resource</a></li>
+            <li><a class="text-muted" href="{% url 'store:about-us' %}">Know Us</a></li>
+            <li><a class="text-muted" href="https://www.google.com/maps?q=22.7546691,78.3536056&z=17&hl=en">Location</a></li>
+            <li><a class="text-muted" href="{% url 'store:contact-us' %}">Contact Us</a></li>
           </ul>
           </div>
-          <div class="col-6 col-md">
-          <h5>About</h5>
+          <div class="col-3">
           <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Team</a></li>
-              <li><a class="text-muted" href="#">Locations</a></li>
-              <li><a class="text-muted" href="#">Privacy</a></li>
-              <li><a class="text-muted" href="#">Terms</a></li>
+            <li><a class="text-muted" href="{% url 'store:terms' %}">Terms & Condition</a></li>
+            <li><a class="text-muted" href="{% url 'store:terms' %}">Privacy</a></li>
           </ul>
           </div>
       </div>

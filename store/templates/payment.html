@@ -1,21 +1,26 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content%}
-{% comment %} <div class="container" style = "center;color:#d7d7d7">
-  <h1 style="text-align:center">Redirecting you to the merchant...</h1>
-  <h1 style="text-align:center">Please do not refresh your page...</h1>
-  <form action="https://securegw-stage.paytm.in/theia/processTransaction" method="post" name="paytm">
-      {% for key, value in param_dict.items %}
-      <input type="hidden" name="{{key}}" value="{{value}}">
-      {% endfor %}
-
-  </form>
+<div class="container">
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "{{razorpay_merchant_key}}",
+    "amount": "{{amount}}", 
+    "currency":"INR",
+    "name": "Anju's Home Decore",
+    "description": "Test Transaction",
+    "order_id": "{{razorpay_order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "callback_url": "{{callback_url}}",
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
 </div>
 {% endblock content %}
-{% block extra_scripts %}
-  <script>
-  document.paytm.submit()
-  </script>
-{% endblock extra_scripts %} {% endcomment %}
-<h2> Payment Page </h2>
-<!--https://securegw.paytm.in/theia/processTransaction-->

@@ -64,8 +64,8 @@ class Profile(BaseModel):
 
 class Items(BaseModel):
     title = models.CharField(max_length=100, null=True, blank=True)
-    price = models.DecimalField(decimal_places=2, max_digits = 10, null=True, blank=True)
-    discount_price = models.DecimalField(decimal_places=2, max_digits = 10, max_length=100, blank=True, null=True)
+    price = models.IntegerField()
+    discount_price = models.IntegerField(null=True, blank=True)
     description = models.TextField(max_length=500)
     size = models.CharField(choices=SIZES, default=SIZES[0][0], max_length=10)
     category = models.CharField(choices=CATEGORY, default=CATEGORY[0][0], max_length=1)
@@ -140,14 +140,11 @@ class OrderItem(BaseModel):
 
 
 class Cart(BaseModel):
-    user = models.ForeignKey(User,
-                             on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     items = models.ManyToManyField(OrderItem)
-    start_date = models.DateTimeField(auto_now_add=True)
-    ordered_date = models.DateTimeField()
+    ordered_date = models.DateTimeField(null=True, blank=True)
     ordered = models.BooleanField(default=False)
-    shipping_address = models.ForeignKey(
-        'Address', on_delete=models.SET_NULL, blank=True, null=True)
+    shipping_address = models.ForeignKey( 'Address', on_delete=models.SET_NULL, blank=True, null=True)
     # payment = models.ForeignKey('Payment', on_delete=models.SET_NULL, blank=True, null=True)
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
@@ -170,7 +167,7 @@ class Cart(BaseModel):
         return total
     
     class Meta:
-        verbose_name_plural = 'Order'
+        verbose_name_plural = 'Orders'
 
 
 class Address(BaseModel):

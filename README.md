@@ -5,10 +5,10 @@ The language of 100% usage in backend is Python 3 with IDE usage of PyCharm. Cur
 implementations.
 
 For running the project, follow the below steps:
--manage.py makemigrations store
--manage.py migrate
--manage.py createsuperuser
--manage.py migrate
--manage.py runserver
+-manage.py makemigrations store <br>
+-manage.py migrate<br>
+-manage.py createsuperuser<br>
+-manage.py migrate<br>
+-manage.py runserver<br>
 
 Kindly contribute on the front-end for better outlook.
